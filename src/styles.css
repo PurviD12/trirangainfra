@@ -1013,6 +1013,7 @@ mat-form-field.mat-form-field {
     width: 300px;
     background-color: rgba(0, 0, 0, .04) !important;
     border-color: rgba(0, 0, 0, .12);
+    border-radius: .25rem;
 }
 
 .mat-form-field-appearance-legacy .mat-form-field-suffix .mat_calendar_icon .mat-datepicker-toggle-default-icon {
@@ -1298,6 +1299,7 @@ mat-form-field.mat-form-field {
     border: 1px solid rgba(0, 0, 0, .12);
     border-radius: 0.25rem;
     cursor: pointer;
+    
 }
 
 .white_space_remove_checkbox .mat-checkbox-layout {
@@ -1307,7 +1309,7 @@ mat-form-field.mat-form-field {
 /* closeicon */
 .date_close_icon {
     width: 34px !important;
-    min-width:34px !important;
+    min-width: 34px !important;
 }
 
 .date_close_icon .mat-icon {

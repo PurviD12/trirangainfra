@@ -82,6 +82,22 @@
     background-color: var(--color_green);
 }
 
+/* .title_Financial_wrapper {
+    width: 15%;
+} */
+
+.search_input_finance {
+    font-size: 14px;
+    outline: none !important;
+    box-shadow: none !important;
+    padding: 0 17px;
+    height: 40px;
+    width: 200px;
+    background-color: rgba(0, 0, 0, .04) !important;
+    border-color: rgba(0, 0, 0, .12);
+    border-radius: .25rem;
+}
+
 @media only screen and (max-width: 1280px) {
     .tab_wrapper_li .tab_wrapper_li_p {
         font-size: 14px;

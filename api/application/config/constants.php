@@ -84,25 +84,14 @@ defined('EXIT_DATABASE')       OR define('EXIT_DATABASE', 8); // database error
 defined('EXIT__AUTO_MIN')      OR define('EXIT__AUTO_MIN', 9); // lowest automatically-assigned error code
 defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest automatically-assigned error code
 
-defined('SYSTEM_NAME')      OR define('SYSTEM_NAME', 'trirangainfra');
-defined('SYSTEM_EMAIL')      OR define('SYSTEM_EMAIL', '');
-// defined('LOGO_URL')      OR define('LOGO_URL', 'http://192.168.1.29/trirangainfra/api/assets/logo_main.png');
-defined('LOGO_URL')      OR define('LOGO_URL', 'https://demo1.saptez.com/circuit-node/assets/images/header/logo_main.png');
-defined('BASE_URL')      OR define('BASE_URL', 'http://192.168.1.6:4700/trirangainfra/');
-defined('BASE_PATH')      OR define('BASE_PATH', 'http://192.168.1.6/trirangainfra/api/assets/');
-defined('UPLOAD_URL')      OR define('UPLOAD_URL', substr(FCPATH, 0, -4).'api/assets/');
+defined('SYSTEM_NAME')      OR define('SYSTEM_NAME', 'Triranga Infra');
+defined('SYSTEM_EMAIL')      OR define('SYSTEM_EMAIL', 'trirangaInfra@gmail.com');
+defined('LOGO_URL')      OR define('LOGO_URL', 'http://192.168.1.6/trirangainfra/assets/images/logo_1.png');
+defined('BASE_URL')      OR define('BASE_URL', 'http://192.168.1.6/trirangainfra/');
+defined('BASE_PATH')      OR define('BASE_PATH', 'http://192.168.1.6/trirangainfra/uploads/');
+defined('UPLOAD_URL')      OR define('UPLOAD_URL', substr(FCPATH, 0, -4).'uploads/');
 defined('IMAGETOOL')      OR define('IMAGETOOL', 'http://192.168.1.6/trirangainfra/api/image-tool/index.php?src=');
-defined('FRONT_URL')      OR define('FRONT_URL', 'http://192.168.1.6:4700/trirangainfra/');
-defined('ADMIN_URL')      OR define('ADMIN_URL', 'http://192.168.1.6/trirangainfra/admin/');
-
-// defined('SYSTEM_NAME')      OR define('SYSTEM_NAME', 'Circuit Node Technologies');
-// defined('SYSTEM_EMAIL')      OR define('SYSTEM_EMAIL', '');
-// defined('LOGO_URL')      OR define('LOGO_URL', 'https://demo1.saptez.com/circuit-node/api/assets/logo_main.png');
-// defined('BASE_URL')      OR define('BASE_URL', 'https://demo1.saptez.com/circuit-node/');
-// defined('BASE_PATH')      OR define('BASE_PATH', 'https://demo1.saptez.com/circuit-node/api/assets/');
-// defined('UPLOAD_URL')      OR define('UPLOAD_URL', substr(FCPATH, 0, -4).'api/assets/');
-// defined('IMAGETOOL')      OR define('IMAGETOOL', 'https://demo1.saptez.com/circuit-node/api/image-tool/index.php?src=');
-// defined('FRONT_URL')      OR define('FRONT_URL', 'https://demo1.saptez.com/circuit-node/');
-// defined('ADMIN_URL')      OR define('ADMIN_URL', 'https://demo1.saptez.com/circuit-node/admin/');
-
+defined('FRONT_URL')      OR define('FRONT_URL', 'http://192.168.1.6/trirangainfra/');
+defined('ADMIN_URL')      OR define('ADMIN_URL', 'http://192.168.1.28/triranga-infra/admin/');
 define('RESOURCE_PATH', substr(FCPATH, 0, -4)."assets/uploads/media/");
+define('IMPORT_PATH', substr(FCPATH, 0, -4)."uploads/");

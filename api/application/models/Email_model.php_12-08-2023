@@ -119,7 +119,7 @@ class email_model extends CI_Model {
 						                <table cellpadding="0" cellspacing="0" border="0" style="width:100%; background:#F4F4F4;padding: 15px 0 15px 0;">
 						                    <tr style="background-color:transparent;">
 						                        <th align="left" style="font-size:16px; line-height:20px; text-align:left; color:#000; font-family: Rubik, sans-serif; font-weight:700; padding:12px 3px 10px; margin:0px;">INQUIRIES FOR '.strtoupper(date('l',time())).'</th>
-						                        <th align="right" style="font-size:12px; line-height:20px; text-align:right; color:#000; font-family: Rubik, sans-serif; font-weight:700; padding:12px 3px 10px; margin:0px;">'.date('d M, Y | h:i A',time()).'</th>
+						                        <th align="right" style="font-size:12px; line-height:20px; text-align:right; color:#000; font-family: Rubik, sans-serif; font-weight:700; padding:12px 3px 10px; margin:0px;">'.date('d M, Y',time()).'</th>
 						                    </tr>
 						                </table>
 						            </td>
@@ -174,7 +174,7 @@ class email_model extends CI_Model {
 		$htmlTemplate = $email_body;
 
 		$bcc = "";
-		$to = "sujit@trirangainfra.com";
+		$to = "infratriranga@gmail.com";
 		$from = "infratriranga@gmail.com";
 		$this->do_email($email_body, $email_subject, $to, $from, $bcc);
 		// $this->do_email_live_test($email_body, $email_subject, $email_to, $from, $bcc, $from_name, $attachments);
@@ -234,7 +234,7 @@ class email_model extends CI_Model {
 	    $config['smtp_host'] = "ssl://smtp.gmail.com";
 	    $config['smtp_port'] = 465;
 	    $config['smtp_user'] = "infratriranga@gmail.com";
-	    $config['smtp_pass'] = "ztvzxuycymqtmhum";
+	    $config['smtp_pass'] = "jbivzbgmmugbfiit";
 	    $config['smtp_debug'] = 4;
 
 	    $config['charset'] = "utf-8";
