@@ -1,0 +1,295 @@
+<ng-container *ngIf="(history_list.inquiry || history_list.history) && !isLoading">
+    <p class="font_20 color_black font_medium capitalize">
+        {{history_list.inquiry.name}}&nbsp;<span class="font_14 font_medium"
+            [ngClass]="{'color_hot': history_list.inquiry.priority == 'hot', 'color_cold': history_list.inquiry.priority == 'cold', 'color_warm': history_list.inquiry.priority == 'warm'}">({{history_list.inquiry.priority}})</span>
+    </p>
+    <br />
+    <div class="user_detail_box center_3 justify_space">
+        <div class="user_detail_box_li" *ngIf="history_list.inquiry.email_address">
+            <p class="font_12 color_gray font_regular pb_6">
+                Email.
+            </p>
+            <p class="font_16 color_black font_regular">
+                {{history_list.inquiry.email_address}}
+            </p>
+        </div>
+        <div class="user_detail_box_li" *ngIf="history_list.inquiry.contact_no">
+            <p class="font_12 color_gray font_regular pb_6">
+                Contact No.
+            </p>
+            <p class="font_16 color_black font_regular">
+                +{{history_list.inquiry.contact_no}}
+            </p>
+        </div>
+        <div class="user_detail_box_li" *ngIf="history_list.inquiry.state_name">
+            <p class="font_12 color_gray font_regular pb_6">
+                State
+            </p>
+            <p class="font_16 color_black font_regular capitalize">
+                {{history_list.inquiry.state_name}}
+            </p>
+        </div>
+        <div class="user_detail_box_li" *ngIf="history_list.inquiry.city_name">
+            <p class="font_12 color_gray font_regular pb_6">
+                City
+            </p>
+            <p class="font_16 color_black font_regular capitalize">
+                {{history_list.inquiry.city_name}}
+            </p>
+        </div>
+        <div class="user_detail_box_li" *ngIf="history_list.inquiry.status">
+            <p class="font_12 color_gray font_regular pb_6">
+                Status
+            </p>
+            <p class="font_16 color_black font_regular">
+                {{history_list.inquiry.status}}
+            </p>
+        </div>
+        <div class="user_detail_box_li" *ngIf="history_list.inquiry.quotation_number">
+            <p class="font_12 color_gray font_regular pb_6">
+                Quotation Number
+            </p>
+            <p class="font_16 color_black font_regular">
+                {{history_list.inquiry.quotation_number}}
+            </p>
+        </div>
+        <div class="user_detail_box_li" *ngIf="history_list.inquiry.plant_city_name">
+            <p class="font_12 color_gray font_regular pb_6">
+                From Which Plant
+            </p>
+            <p class="font_16 color_black font_regular">
+                {{history_list.inquiry.plant_city_name}}
+            </p>
+        </div>
+        <div class="user_detail_box_li" *ngIf="history_list.inquiry.designation">
+            <p class="font_12 color_gray font_regular pb_6">
+                Designation
+            </p>
+            <p class="font_16 color_black font_regular">
+                {{history_list.inquiry.designation}}
+            </p>
+        </div>
+        <div class="user_detail_box_li" *ngIf="history_list.inquiry.company_name">
+            <p class="font_12 color_gray font_regular pb_6">
+                Company Name
+            </p>
+            <p class="font_16 color_black font_regular">
+                {{history_list.inquiry.company_name}}
+            </p>
+        </div>
+        <div class="user_detail_box_li" *ngIf="history_list.inquiry.company_website">
+            <p class="font_12 color_gray font_regular pb_6">
+                Company Website
+            </p>
+            <a [href]="history_list.inquiry.company_website" target="_blank" class="font_16 color_blue font_regular">
+                {{history_list.inquiry.company_website}}
+            </a>
+        </div>
+        <div class="user_detail_box_li" *ngIf="history_list.inquiry.rate">
+            <p class="font_12 color_gray font_regular pb_6">
+                Rate
+            </p>
+            <p class="font_16 color_black font_regular">
+                {{history_list.inquiry.rate}}
+            </p>
+        </div>
+        <div class="user_detail_box_li" *ngIf="history_list.inquiry.quantity">
+            <p class="font_12 color_gray font_regular pb_6">
+                Quantity
+            </p>
+            <p class="font_16 color_black font_regular">
+                {{history_list.inquiry.quantity}}
+            </p>
+        </div>
+        <div class="user_detail_box_li" *ngIf="history_list.inquiry.height">
+            <p class="font_12 color_gray font_regular pb_6">
+                Height
+            </p>
+            <p class="font_16 color_black font_regular">
+                {{history_list.inquiry.height}}
+            </p>
+        </div>
+        <div class="user_detail_box_li" *ngIf="history_list.inquiry.lead_value">
+            <p class="font_12 color_gray font_regular pb_6">
+                Lead Value
+            </p>
+            <p class="font_16 color_black font_regular">
+                {{history_list.inquiry.lead_value}}
+            </p>
+        </div>
+        <ng-container *ngIf="history_list.inquiry.source != 'Others'">
+            <div class="user_detail_box_li" *ngIf="history_list.inquiry.source">
+                <p class="font_12 color_gray font_regular pb_6">
+                    Source
+                </p>
+                <p class="font_16 color_black font_regular">
+                    {{history_list.inquiry.source}}
+                </p>
+            </div>
+        </ng-container>
+        <ng-container *ngIf="history_list.inquiry.source == 'Others'">
+            <div class="user_detail_box_li" *ngIf="history_list.inquiry.source">
+                <p class="font_12 color_gray font_regular pb_6">
+                    Other Source
+                </p>
+                <p class="font_16 color_black font_regular">
+                    {{history_list.inquiry.other_source ? history_list.inquiry.other_source : "--"}}
+                </p>
+            </div>
+        </ng-container>
+        <div class="user_detail_box_li" *ngIf="history_list.inquiry.unit">
+            <p class="font_12 color_gray font_regular pb_6">
+                Unit
+            </p>
+            <p class="font_16 color_black font_regular">
+                {{history_list.inquiry.unit}}
+            </p>
+        </div>
+        <div class="user_detail_box_li width_100_im" *ngIf="history_list.inquiry.remarks">
+            <p class="font_12 color_gray font_regular pb_6">
+                Remarks
+            </p>
+            <p class="font_16 color_black font_regular line_1_4">
+                {{history_list.inquiry.remarks}}
+            </p>
+        </div>
+        <div class="user_detail_box_li width_100_im" *ngIf="history_list.inquiry.attachment_array.length > 0">
+            <p class="font_12 color_gray font_regular pb_6">
+                Attachments
+            </p>
+            <div class="attachment_ul center_3">
+                <div class="attachment_li center_2"
+                    *ngFor="let data of history_list.inquiry.attachment_array; let i = index;">
+                    <p class="font_16 color_black line_1_2">
+                        {{data.name}}
+                    </p>
+                    <div class="attachment_left_margin"></div>
+                    <ng-container *ngIf="data.attachment_full">
+                        <a href="{{data.attachment_full}}" target="_blank" class="attachment_icons" mat-icon-button>
+                            <mat-icon class="more_option_icon">picture_as_pdf</mat-icon>
+                        </a>
+                    </ng-container>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="center_2 width_100" *ngIf="history_list.inquiry.attachment_full">
+            <a href="{{history_list.inquiry.attachment_full}}" target="_blank"
+                class="font_16 color_blue font_medium ml_auto">
+                View Attachment
+            </a>
+        </div> -->
+    </div>
+    <br />
+    <br />
+    <p class="font_20 color_black font_medium capitalize">
+        Lead History
+    </p>
+    <br />
+    <div class="table_wrapper">
+        <table class="width_100">
+            <tr class="table_th">
+                <th style="width: 170px;">
+                    <p class="text">Sales Name</p>
+                </th>
+                <th style="width: 170px;">
+                    <p class="text">Status</p>
+                </th>
+                <th>
+                    <p class="text">Remarks</p>
+                </th>
+                <th style="width: 120px;">
+                    <p class="text">Next FollowUp Date</p>
+                </th>
+                <th style="width: 120px;">
+                    <p class="text">Created At</p>
+                </th>
+            </tr>
+            <ng-container *ngIf="history_list.history.length > 0">
+                <tr class="table_tr" [ngClass]="{'overdue': data.overdue == 1}"
+                    *ngFor="let data of history_list.history;let i = index;">
+                    <td style="width: 170px;">
+                        <ng-container *ngIf="data.transfer_to.name && data.transfer_from.name">
+                            <p class="font_medium capitalize line_1_2" *ngIf="data.transfer_from">
+                                {{data.transfer_from.name}} <span class="font_regular">to</span>
+                                {{data.transfer_to.name}}
+                            </p>
+                            <p *ngIf="!data.transfer_from.name || !data.transfer_to.name">
+                                --
+                            </p>
+                        </ng-container>
+                        <ng-container *ngIf="data.transfer_to.name && !data.transfer_from.name">
+                            <p class="font_medium capitalize line_1_2">
+                                {{data.followUp_add_details.name}} To {{data.transfer_to.name}}
+                            </p>
+                        </ng-container>
+                        <ng-container *ngIf="!data.transfer_to.name && !data.transfer_from.name">
+                            <p class="font_medium capitalize" *ngIf="data.followUp_add_details.name">
+                                {{data.followUp_add_details.name}}
+                            </p>
+                            <p class="font_regular" *ngIf="!data.followUp_add_details.name">
+                                --
+                            </p>
+                        </ng-container>
+                    </td>
+                    <td style="width: 170px;">
+                        <p *ngIf="data.status">
+                            {{data.status}}
+                        </p>
+                        <p *ngIf="!data.status">
+                            --
+                        </p>
+                        <ng-container *ngIf="data.attachment_full">
+                            <a href="{{data.attachment_full}}" target="_blank"
+                                class="font_14 color_blue font_medium line_1_4">
+                                View Attachment
+                            </a>
+                        </ng-container>
+                    </td>
+                    <td>
+                        <p *ngIf="data.remarks">
+                            {{data.remarks}}
+                        </p>
+                        <p *ngIf="!data.remarks">
+                            --
+                        </p>
+                    </td>
+                    <td style="width: 120px;" class="line_1_4">
+                        <ng-container *ngIf="data.followUp_date.created_at">
+                            <p class="font_regular color_black font_14 line_1_4">
+                                {{data.followUp_date.created_at.replace(' ', '&nbsp;').replace(' ', '&nbsp;')}}</p>
+                            <p class="color_gray font_regular font_14 line_1_4">
+                                {{data.followUp_date.created_at_time}}
+                            </p>
+                        </ng-container>
+                        <p class="font_regular font_14" *ngIf="!data.followUp_date.created_at">
+                            --
+                        </p>
+                    </td>
+                    <td style="width: 120px;" class="line_1_4">
+                        {{data.created_at.replace(' ', '&nbsp;').replace(' ', '&nbsp;')}}<br />
+                        <p class="color_gray font_regular">{{data.created_at_time}}</p>
+                    </td>
+                </tr>
+            </ng-container>
+        </table>
+    </div>
+</ng-container>
+<ng-container *ngIf="!history_list.inquiry && !isLoading">
+    <div class="no_record_text">
+        <div class="text-center">
+            <div class="no_record_search_icon">
+                <mat-icon>search</mat-icon>
+            </div>
+            <p class="font_20 color_gray font_medium">
+                Lead Data Not Found
+            </p>
+        </div>
+    </div>
+</ng-container>
+<ng-container *ngIf="isLoading">
+    <div class="record_load_spinner">
+        <button type="button" class="record_load_spinner_box" mat-raised-button>
+            <mat-spinner></mat-spinner>
+        </button>
+    </div>
+</ng-container>

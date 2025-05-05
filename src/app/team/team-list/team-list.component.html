@@ -1,0 +1,226 @@
+<div class="pages_wrapper">
+    <div class="col-lg-12">
+        <div class="title_wrapper">
+            <div class="center_2 relative_pos">
+                <div class="date_display_wrapper" *ngIf="selectedDateDisplay">
+                    <div class="center_2">
+                        <p class="font_12 color_black font_regular">
+                            {{selectedDateDisplay}}
+                        </p>
+                        <!-- <a href="javascript:void(0);" class="date_close_icon" mat-button (click)="clear_date_range();">
+                            <mat-icon>close</mat-icon>
+                        </a> -->
+                    </div>
+                </div>
+                <ng-container>
+                    <button type="button" class="date_btn relative_pos" mat-icon-button>
+                        <mat-icon class="date_btn_icon">calendar_today</mat-icon>
+                        <input type="text" ngxDaterangepickerMd [(ngModel)]="selected" matTooltip="Date Range"
+                        (ngModelChange)="onDateRangeSelected($event)" class="date_range_input_hide"
+                        [showCustomRangeLabel]="true" [alwaysShowCalendars]="false" [ranges]="ranges"
+                        [linkedCalendars]="true" [isInvalidDate]="isInvalidDate" [showClearButton]="false"
+                        [showCancel]="true" placeholder="Select Date Range..." />
+                    </button>
+                </ng-container>
+                <h1 class="font_24 color_black font_medium">
+                    Team
+                </h1>
+                <div class="mr_auto"></div>
+                <div class="title_search_wrapper">
+                    <input type="text" class="form-control search_input" [(ngModel)]="team_obj.search" #search="ngModel"
+                        autocomplete="off" maxlength="255" placeholder="Search..." (keyup.enter)="team_get();">
+                    <!-- <mat-form-field appearance="outline">
+                        <mat-label class="font_16 line_1_2 font_regular">Search More...</mat-label>
+                        <input type="text" id="search" name="search"
+                            [(ngModel)]="team_obj.search" #search="ngModel"
+                            autocomplete="off" maxlength="255" matInput>
+                    </mat-form-field> -->
+                </div>
+                <div class="p_10"></div>
+                <div class="more_menu_option_wrapper">
+                    <button type="button" class="more_menu_option_btn" mat-stroked-button
+                        [matMenuTriggerFor]="more_menu_option">
+                        <mat-icon>apps</mat-icon>
+                    </button>
+                    <mat-menu class="more_menu_div" #more_menu_option="matMenu" xPosition="before">
+                        <div class="center_3">
+                            <a routerLink="/team/add" mat-button class="more_menu_li">
+                                <div class="more_menu_li_icon">
+                                    <mat-icon>add_circle_outline</mat-icon>
+                                </div>
+                                <div class="more_menu_li_p">
+                                    <p class="font_16 color_gray font_regular">
+                                        Team
+                                    </p>
+                                </div>
+                            </a>
+                        </div>
+                    </mat-menu>
+                </div>
+            </div>
+        </div>
+        <ng-container *ngIf="!isLoading">
+            <div class="table_wrapper">
+                <table class="width_100">
+                    <tr class="table_th">
+                        <th style="padding-left: 10px;">#</th>
+                        <th>
+                            <p class="text">Name</p>
+                        </th>
+                        <th>
+                            <p class="text">Email ID</p>
+                        </th>
+                        <th>
+                            <p class="text">Mobile No.</p>
+                        </th>
+                        <th style="width: 80px;">
+                            <p class="text">Assign</p>
+                        </th>
+                        <th style="width: 80px;">
+                            <p class="text">FollowUp</p>
+                        </th>
+                        <th style="width: 80px;">
+                            <p class="text">Overdue</p>
+                        </th>
+                        <th style="width: 80px;">
+                            <p class="text">Lost</p>
+                        </th>
+                        <th style="width: 180px;">
+                            <div class="center_2">
+                                <p class="text">Status</p>
+                            </div>
+                        </th>
+                        <th style="width: 120px;">
+                            <p class="text">Created At</p>
+                        </th>
+                        <th style="width: 40px;"></th>
+                    </tr>
+                    <ng-container *ngIf="team_list.length > 0">
+                        <tr class="table_tr" *ngFor="let data of team_list;let i = index;">
+                            <td style="padding-left: 10px;">
+                                {{data.master_user_id}}
+                            </td>
+                            <td>
+                                <p class="font_medium capitalize color_black">
+                                    {{data.name}}
+                                </p>
+                            </td>
+                            <td>
+                                <p class="font_regular color_gray">
+                                    {{data.email_address}}
+                                </p>
+                            </td>
+                            <td>
+                                <p class="font_regular color_gray">
+                                    +{{data.contact_no}}
+                                </p>
+                            </td>
+                            <td style="width: 80px;">
+                                <p class="font_regular color_gray">
+                                    {{data.total.assign}}
+                                </p>
+                            </td>
+                            <td style="width: 80px;">
+                                <p class="font_regular color_gray">
+                                    {{data.total.followUp}}
+                                </p>
+                            </td>
+                            <td style="width: 80px;">
+                                <p class="font_regular color_gray">
+                                    {{data.total.overdue}}
+                                </p>
+                            </td>
+                            <td style="width: 80px;">
+                                <p class="font_regular color_gray">
+                                    {{data.total.lost}}
+                                </p>
+                            </td>
+                            <td style="width: 180px;">
+                                <p class="font_medium color_green" *ngIf="data.is_active == 1">
+                                    Active
+                                </p>
+                                <p class="font_medium color_red" *ngIf="data.is_active == 0">
+                                    InActive
+                                </p>
+                            </td>
+                            <td style="width: 120px;" class="line_1_4">
+                                {{data.created_at.replace(' ', '&nbsp;').replace(' ', '&nbsp;')}}<br />
+                                <p class="color_gray font_regular">{{data.created_at_time}}</p>
+                            </td>
+                            <td class="last_column_td">
+                                <button mat-icon-button [matMenuTriggerFor]="more_option">
+                                    <mat-icon>more_vert</mat-icon>
+                                </button>
+                                <mat-menu #more_option="matMenu" xPosition="before">
+                                    <button [routerLink]="'/team/update/'+decodeValue(data.master_user_id)"
+                                        type="button" mat-menu-item>
+                                        <div class="center_2">
+                                            <mat-icon class="more_option_icon">edit</mat-icon>
+                                            <p class="font_16 color_black font_regular">
+                                                Edit
+                                            </p>
+                                        </div>
+                                    </button>
+                                    <button [routerLink]="'/team/change-password/'+decodeValue(data.master_user_id)"
+                                        type="button" mat-menu-item>
+                                        <div class="center_2">
+                                            <mat-icon class="more_option_icon">lock</mat-icon>
+                                            <p class="font_16 color_black font_regular">
+                                                Change Password
+                                            </p>
+                                        </div>
+                                    </button>
+                                    <button type="button" (click)="team_remove(data.master_user_id);" mat-menu-item>
+                                        <div class="center_2">
+                                            <mat-icon class="more_option_icon">delete_outline</mat-icon>
+                                            <p class="font_16 color_black font_regular">
+                                                Delete
+                                            </p>
+                                        </div>
+                                    </button>
+                                    <button type="button" (click)="status_change_click(data.master_user_id, i);" mat-menu-item>
+                                        <div class="center_2">
+                                            <mat-icon class="more_option_icon" *ngIf="data.is_active == 1">close</mat-icon>
+                                            <mat-icon class="more_option_icon" *ngIf="data.is_active == 0">check</mat-icon>
+                                            <p class="font_16 color_black font_regular" *ngIf="data.is_active == 1">
+                                                InActive
+                                            </p>
+                                            <p class="font_16 color_black font_regular" *ngIf="data.is_active == 0">
+                                                Active
+                                            </p>
+                                        </div>
+                                    </button>
+                                </mat-menu>
+                            </td>
+                        </tr>
+                    </ng-container>
+                </table>
+            </div>
+        </ng-container>
+        <ng-container *ngIf="!team_list.length && !isLoading">
+            <div class="no_record_text">
+                <div class="text-center">
+                    <div class="no_record_search_icon">
+                        <mat-icon>search</mat-icon>
+                    </div>
+                    <p class="font_20 color_gray font_medium">
+                        User Not Found
+                    </p>
+                </div>
+            </div>
+        </ng-container>
+        <ng-container *ngIf="isLoading">
+            <div class="record_load_spinner">
+                <button type="button" class="record_load_spinner_box" mat-raised-button>
+                    <mat-spinner></mat-spinner>
+                </button>
+            </div>
+        </ng-container>
+        <ng-container *ngIf="team_list.length > 0 && !isLoading">
+        <mat-paginator class="paginator_wrapper" [length]="total_record" [pageSize]="team_obj.limit"
+            [pageSizeOptions]="pageSizeOptions" (page)="pageEvent = $event; onPageChange($event);"
+            [showFirstLastButtons]="true">
+        </mat-paginator>
+        </ng-container>
+    </div>
+</div>

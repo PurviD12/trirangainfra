@@ -1,0 +1,91 @@
+<div style="display: block;">
+    <h1 class="text-center" mat-dialog-title>Send Email</h1>
+    <form name="form" (ngSubmit)="emailForm.form.valid && SubmitEmailForm()" #emailForm="ngForm" novalidate>
+        <div class="row">
+            <div class="col-lg-12">
+                <mat-form-field appearance="fill">
+                    <mat-label class="font_16 line_1_2 font_regular">Email Subject</mat-label>
+                    <input type="text" id="email_subject" name="email_subject" [(ngModel)]="email_obj.email_subject"
+                        [ngClass]="{ 'is-invalid': emailForm.submitted && email_subject.invalid }"
+                        #email_subject="ngModel" autocomplete="off" required="required" maxlength="255" matInput>
+                </mat-form-field>
+            </div>
+            <div class="col-lg-12">
+
+                <mat-form-field appearance="fill">
+                    <mat-label class="font_16 line_1_2 font_regular">Email To</mat-label>
+                    <mat-chip-grid #chipGridcc aria-label="">
+                        <ng-container *ngFor="let data of email_to_array;">
+                            <mat-chip-row (removed)="remove(data)">
+                                {{data.name}}
+                                <button matChipRemove [attr.aria-label]="'remove ' + data">
+                                    <mat-icon>cancel</mat-icon>
+                                </button>
+                            </mat-chip-row>
+                        </ng-container>
+                        <input placeholder="Add Email" id="name" name="name" [matChipInputFor]="chipGridcc" autocomplete="off" maxlength="255"
+                            [pattern]="emailPattern" (matChipInputTokenEnd)="add($event)" />
+                    </mat-chip-grid>
+                </mat-form-field>
+            </div>
+            <div class="col-lg-12">
+                <mat-form-field appearance="fill">
+                    <mat-label class="font_16 line_1_2 font_regular">Upload File</mat-label>
+                    <input type="file" (change)="onFileSelected($event)" name="attachment_file"
+                        [(ngModel)]="email_obj.attachment_file" #fileInput accept=".pdf" hidden>
+                    <mat-icon type="button" class="file_attach_icon" mat-button (click)="openFileInput()"
+                        matSuffix>attach_file</mat-icon>
+                    <input matInput [value]="fileInput.files && fileInput.files[0]?.name || ''" readonly>
+                </mat-form-field>
+                <div class="input_bottom_text center_3">
+                    <div class="ml_auto"></div>
+                    <p class="font_12 color_gray">
+                        Allow only pdf file.
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <!-- <ck-editor [config]="configEditor" skin="moono-lisa" language="en" name="strEmailFormat"
+                    [config]="configEditor" [(ngModel)]="email_obj.strEmailFormat" #strEmailFormat="ngModel">
+                </ck-editor> -->
+                <!-- <ckeditor [editor]="Editor" [config]="editorConfig" [(ngModel)]="email_obj.email_content"
+                    [ngModelOptions]="{ standalone: true }" language="en"></ckeditor>
+                <div style="padding: 0 0 1.34375em 0;"></div> -->
+                <mat-form-field appearance="fill">
+                    <mat-label class="font_16 line_1_2 font_regular">Email Content</mat-label>
+                    <textarea type="text" [ngClass]="{ 'is-invalid': emailForm.submitted && email_content.invalid }"
+                        required="required" id="email_content" name="email_content"
+                        [(ngModel)]="email_obj.email_content" #email_content="ngModel" autocomplete="off" rows="5"
+                        matInput></textarea>
+                </mat-form-field>
+            </div>
+            <div class="col-lg-12">
+                <button type="submit" class="submit_btn submit_btn_login" mat-button [disabled]="isSubmitted">
+                    <div class="center_2 justify_center">
+                        <p class="font_18 color_white line_1">
+                            {{button_text}}
+                        </p>
+                        <ng-container *ngIf="isSubmitted">
+                            <mat-spinner class="login_spinner"></mat-spinner>
+                        </ng-container>
+                    </div>
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+<!-- <mat-chip-grid #chipGridcc aria-label="">
+    <ng-container *ngFor="let email_data of save_obj.email_address_cc_array;">
+        <mat-chip-row (removed)="chip_remove_email_cc(email_data.email_address_cc)">
+            {{email_data.email_address_cc}}
+            <button matChipRemove [attr.aria-label]="'remove ' + email_data">
+                <mat-icon>cancel</mat-icon>
+            </button>
+        </mat-chip-row>
+    </ng-container>
+    <input placeholder="Add Email CC..." id="email_address_cc" name="email_address_cc"
+        [matChipInputFor]="chipGridcc" autocomplete="off" maxlength="255"
+        [pattern]="emailPattern" (matChipInputTokenEnd)="add_email_cc($event)" />
+</mat-chip-grid> -->

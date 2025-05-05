@@ -1,0 +1,9 @@
+.user_detail_box{
+    border: 1px solid #dde1e4;
+    border-radius: var(--border_radius_10);
+    padding: 10px 20px;
+}
+.user_detail_box_li{
+    width: calc(100% / 2 - 15px);
+    padding: 10px 0;
+}

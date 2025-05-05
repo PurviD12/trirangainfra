@@ -1,0 +1,120 @@
+<div style="display: block;">
+    <h1 class="text-center" mat-dialog-title>Add Next FollowUp</h1>
+    <!-- <div mat-dialog-content></div> -->
+    <form name="form" (ngSubmit)="followUpForm.form.valid && SubmitFollowUpForm()" #followUpForm="ngForm" novalidate>
+        <div class="row">
+            <div class="col-lg-12" *ngIf="followUp_obj.status_list.length > 0">
+                <mat-form-field appearance="fill" class="icon_margin">
+                    <mat-label class="font_16 line_1_2 font_regular">Select Status</mat-label>
+                    <mat-select id="status" name="status" [(ngModel)]="followUp_obj.status" #status="ngModel"
+                        autocomplete="off" [ngClass]="{ 'is-invalid': followUpForm.submitted && status.invalid }"
+                        required="required" (ngModelChange)="status_change();">
+                        <mat-option value="{{data_2.name}}"
+                            *ngFor="let data_2 of followUp_obj.status_list;">{{data_2.name}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="col-lg-12" *ngIf="show_obj.show_attachment == 1">
+                <mat-form-field appearance="fill">
+                    <mat-label class="font_16 line_1_2 font_regular">Upload File</mat-label>
+                    <input type="file" (change)="onFileSelected($event)" name="attachment_file"
+                        [(ngModel)]="followUp_obj.attachment_file" #fileInput accept=".pdf" required="required" hidden>
+                    <mat-icon type="button" class="file_attach_icon" mat-button (click)="openFileInput()"
+                        matSuffix>attach_file</mat-icon>
+                    <input matInput [value]="fileInput.files && fileInput.files[0]?.name || ''" required="required"
+                        readonly>
+
+                </mat-form-field>
+                <div class="input_bottom_text center_3">
+                    <div class="ml_auto"></div>
+                    <p class="font_12 color_gray">
+                        Allow only pdf file.
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-12" *ngIf="show_obj.show_follow_up_date == 1">
+                <mat-form-field appearance="fill">
+                    <mat-label class="font_16 line_1_2 font_regular">Next FollowUp Date</mat-label>
+                    <input matInput [min]="minDate" [ngxMatDatetimePicker]="picker" name="follow_up_date_display"
+                        id="follow_up_date_display"
+                        [ngClass]="{ 'is-invalid': followUpForm.submitted && follow_up_date_display.invalid }"
+                        [(ngModel)]="followUp_obj.follow_up_date_display" required="required"
+                        #follow_up_date_display="ngModel" readonly>
+                    <mat-datepicker-toggle class="mat_calendar_icon" matSuffix [for]="$any(picker)">
+                        <!-- <mat-icon matDatepickerToggleIcon>calendar_today</mat-icon> -->
+                    </mat-datepicker-toggle>
+                    <ngx-mat-datetime-picker #picker [showSpinners]="false" [showSeconds]="false" [stepHour]="0"
+                        [stepMinute]="0" [stepSecond]="0" [touchUi]="false" [enableMeridian]="true"
+                        [disableMinute]="false" [hideTime]="false">
+                        <!-- Custom icon or text of Apply icon -->
+                        <mat-icon>star</mat-icon>
+                        <ng-template>
+                            <!-- <mat-icon>star</mat-icon> -->
+                            <span>OK</span>
+                        </ng-template>
+                    </ngx-mat-datetime-picker>
+                    <!-- <mat-datepicker #picker disabled="false"></mat-datepicker> -->
+                </mat-form-field>
+            </div>
+            <!-- <ng-container *ngFor="let data_2 of followUp_obj.status_list;">
+                <ng-container *ngIf="data_2.name == followUp_obj.status"> -->
+            <div class="col-lg-12" *ngIf="show_obj.show_remaks == 1">
+                <mat-form-field appearance="fill">
+                    <mat-label class="font_16 line_1_2 font_regular">Remarks</mat-label>
+                    <textarea type="text" [ngClass]="{ 'is-invalid': followUpForm.submitted && remarks.invalid }"
+                        required="required" id="remarks" name="remarks" [(ngModel)]="followUp_obj.remarks"
+                        #remarks="ngModel" autocomplete="off" matInput></textarea>
+                </mat-form-field>
+            </div>
+            <!-- </ng-container>
+            </ng-container> -->
+            <div class="col-lg-12">
+                <button type="submit" class="submit_btn submit_btn_login" mat-button [disabled]="isSubmitted">
+                    <div class="center_2 justify_center">
+                        <p class="font_18 color_white line_1">
+                            {{button_text}}
+                        </p>
+                        <ng-container *ngIf="isSubmitted">
+                            <mat-spinner class="login_spinner"></mat-spinner>
+                        </ng-container>
+                    </div>
+                </button>
+            </div>
+        </div>
+    </form>
+    <!-- <div mat-dialog-actions>
+        <button mat-button (click)="closeDialog(false)">Cancel</button>
+        <button mat-button color="warn" (click)="closeDialog(true)">Confirm</button>
+    </div> -->
+</div>
+
+
+<!-- <mat-form-field class="mat_form_field" appearance="outline">
+    <mat-label class="font_16 line_1_2 font_regular_WorkSans">Start Date</mat-label>
+    <input matInput [min]="minDate" [ngxMatDatetimePicker]="picker" name="from_date_display" id="from_date_display"
+        [ngClass]="{ 'is-invalid': inquiryForm.submitted && from_date_display.invalid }"
+        [(ngModel)]="save_obj.from_date_display" required="required" #from_date_display="ngModel" readonly
+        [disabled]="save_obj.offer_for != 'company' || app_banner_id != ''">
+    <mat-datepicker-toggle class="mat_calendar_icon" matSuffix [for]="$any(picker)">
+    </mat-datepicker-toggle>
+    <ngx-mat-datetime-picker #picker [showSpinners]="false" [showSeconds]="false" [stepHour]="0" [stepMinute]="0"
+        [stepSecond]="0" [touchUi]="false" [enableMeridian]="true" [disableMinute]="false" [hideTime]="false">
+        <ng-template>
+            <span>OK</span>
+        </ng-template>
+    </ngx-mat-datetime-picker>
+</mat-form-field> -->
+
+
+
+
+
+<!-- <div class="actions">
+    <button class=" mat-button mat-stroked-button mat-button-base">
+        <span class="mat-button-wrapper">
+            <mat-icon class="mat-icon notranslate material-icons mat-icon-no-color" role="img"
+                aria-hidden="true">done</mat-icon>
+        </span>
+        <div class="mat-button-ripple mat-ripple" matripple=""></div>
+        <div class="mat-button-focus-overlay"></div>
+    </button> -->

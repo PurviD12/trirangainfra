@@ -1,0 +1,663 @@
+<div class="pages_wrapper">
+    <div class="col-lg-12">
+        <div class="title_wrapper">
+            <div class="center_2 relative_pos">
+                <div class="date_display_wrapper" *ngIf="selectedDateDisplay_2">
+                    <div class="center_2">
+                        <p class="font_12 color_black font_regular">
+                            {{selectedDateDisplay_2}}
+                        </p>
+                        <!-- <a href="javascript:void(0);" class="date_close_icon" mat-button
+                            (click)="clear_date_range_2('click');">
+                            <mat-icon>close</mat-icon>
+                        </a> -->
+                    </div>
+                </div>
+                <div class="date_display_wrapper" *ngIf="selectedDateDisplay">
+                    <div class="center_2">
+                        <p class="font_12 color_black font_regular">
+                            {{selectedDateDisplay}}
+                        </p>
+                        <!-- <a href="javascript:void(0);" class="date_close_icon" mat-button (click)="clear_date_range();">
+                            <mat-icon>close</mat-icon>
+                        </a> -->
+                    </div>
+                </div>
+                <ng-container *ngIf="router.url != '/dashboard' && show_range_picker">
+                    <button type="button" class="date_btn relative_pos" mat-icon-button>
+                        <mat-icon class="date_btn_icon">calendar_today</mat-icon>
+                        <input type="text" class="date_range_input_hide" ngxDaterangepickerMd [(ngModel)]="selected"
+                            matTooltip="Date Range" (ngModelChange)="onDateRangeSelected($event)"
+                            class="date_range_input_hide" [showCustomRangeLabel]="true" [alwaysShowCalendars]="false"
+                            [ranges]="ranges1" [linkedCalendars]="true" pickerDirective [isInvalidDate]="isInvalidDate"
+                            [showClearButton]="false" [showCancel]="true" placeholder="Select Date Range..." />
+                    </button>
+                </ng-container>
+                <ng-container *ngIf="router.url == '/dashboard' && inquiries_obj.lead_type == 'upcoming_followUp_lead'">
+                    <button type="button" class="date_btn relative_pos" mat-icon-button>
+                        <mat-icon class="date_btn_icon">calendar_today</mat-icon>
+                        <input type="text" class="date_range_input_hide" ngxDaterangepickerMd [(ngModel)]="selected_2"
+                            matTooltip="Date Range" (ngModelChange)="onDateRangeSelected_2($event)"
+                            class="date_range_input_hide" [showCustomRangeLabel]="true" [alwaysShowCalendars]="false"
+                            [ranges]="ranges2" pickerDirective [linkedCalendars]="true" [isInvalidDate]="isInvalidDate"
+                            [showClearButton]="false" [showCancel]="true" placeholder="Select Date Range..." />
+                    </button>
+                </ng-container>
+                <h1 class="font_24 color_black font_medium" *ngIf="router.url == '/dashboard'">
+                    Dashboard
+                </h1>
+                <h1 class="font_24 color_black font_medium" *ngIf="router.url == '/inquiries'">
+                    All Leads
+                </h1>
+                <div class="mr_auto"></div>
+                <ng-container *ngIf="filter_applyed">
+                    <div class="clear_filter_btn" matRipple (click)="clear_all_filter();">
+                        <p class="font_16 color_black font_regular">
+                            Remove All Filters
+                        </p>
+                    </div>
+                    <div class="p_5"></div>
+                </ng-container>
+                <div class="title_search_wrapper">
+                    <input type="text" class="form-control search_input" [(ngModel)]="inquiries_obj.search"
+                        #search="ngModel" autocomplete="off" maxlength="255" placeholder="Search..."
+                        (keyup.enter)="inquiries_get('filter_apply');">
+                    <!-- <mat-form-field appearance="outline">
+                        <mat-label class="font_16 line_1_2 font_regular">Search More...</mat-label>
+                        <input type="text" id="search" name="search"
+                            [(ngModel)]="inquiries_obj.search" #search="ngModel"
+                            autocomplete="off" maxlength="255" matInput>
+                    </mat-form-field> -->
+                </div>
+                <!-- <ng-container *ngIf="inquiries_obj.search != ''">
+                    <div class="p_5"></div>
+                    <div class="clear_filter_btn" matRipple (click)="inquiries_get('filter_apply')">
+                        <p class="font_16 color_black font_regular">
+                            Apply
+                        </p>
+                    </div>
+                </ng-container> -->
+                <div class="p_5"></div>
+                <div class="more_menu_option_wrapper">
+                    <button type="button" class="more_menu_option_btn" mat-stroked-button
+                        [matMenuTriggerFor]="more_menu_option">
+                        <mat-icon>apps</mat-icon>
+                    </button>
+                    <mat-menu class="more_menu_div" #more_menu_option="matMenu" xPosition="before">
+                        <div class="center_3">
+                            <a routerLink="/inquiry/add" mat-button class="more_menu_li">
+                                <div class="more_menu_li_icon">
+                                    <mat-icon>add_circle_outline</mat-icon>
+                                </div>
+                                <div class="more_menu_li_p">
+                                    <p class="font_16 color_gray font_regular">
+                                        Inquiry
+                                    </p>
+                                </div>
+                            </a>
+                            <ng-container *ngIf="inquiry_list.length > 0 && !export">
+                                <a href="javascript:void(0);" (click)="inquiry_export();" mat-button
+                                    class="more_menu_li">
+                                    <div class="more_menu_li_icon">
+                                        <mat-icon>import_export</mat-icon>
+                                    </div>
+                                    <div class="more_menu_li_p">
+                                        <p class="font_16 color_gray font_regular">
+                                            Export
+                                        </p>
+                                    </div>
+                                </a>
+                            </ng-container>
+                            <ng-container *ngIf="!inquiry_list.length || export">
+                                <a href="javascript:void(0);" mat-button class="more_menu_li" style="opacity: 0.5;">
+                                    <div class="more_menu_li_icon">
+                                        <mat-icon>import_export</mat-icon>
+                                    </div>
+                                    <div class="more_menu_li_p">
+                                        <p class="font_16 color_gray font_regular">
+                                            Export
+                                        </p>
+                                    </div>
+                                </a>
+                            </ng-container>
+                            <ng-container *ngIf="store_data.type == 'admin' && !transfer_obj.ids.length">
+                                <ng-container *ngIf="inquiry_list.length > 0 && !export">
+                                    <a href="javascript:void(0);" (click)="inquiry_assign();" mat-button
+                                        class="more_menu_li">
+                                        <div class="more_menu_li_icon">
+                                            <!-- <mat-icon>assignment_ind</mat-icon> -->
+                                            <mat-icon>playlist_add</mat-icon>
+                                        </div>
+                                        <div class="more_menu_li_p">
+                                            <p class="font_16 color_gray font_regular">
+                                                Select Lead
+                                            </p>
+                                        </div>
+                                    </a>
+                                </ng-container>
+                                <ng-container *ngIf="!inquiry_list.length || export">
+                                    <a href="javascript:void(0);" mat-button class="more_menu_li" style="opacity: 0.5;">
+                                        <div class="more_menu_li_icon">
+                                            <mat-icon>playlist_add</mat-icon>
+                                        </div>
+                                        <div class="more_menu_li_p">
+                                            <p class="font_16 color_gray font_regular">
+                                                Select Lead
+                                            </p>
+                                        </div>
+                                    </a>
+                                </ng-container>
+                            </ng-container>
+                            <ng-container *ngIf="store_data.type == 'admin' && transfer_obj.ids.length">
+                                <a href="javascript:void(0);" (click)="transfer_lead();" mat-button
+                                    class="more_menu_li">
+                                    <div class="more_menu_li_icon">
+                                        <mat-icon>assignment_ind</mat-icon>
+                                    </div>
+                                    <div class="more_menu_li_p">
+                                        <p class="font_16 color_gray font_regular">
+                                            Assign Lead To
+                                        </p>
+                                    </div>
+                                </a>
+                            </ng-container>
+                        </div>
+                    </mat-menu>
+                </div>
+            </div>
+        </div>
+        <ng-container *ngIf="router.url == '/dashboard'">
+            <div class="tab_wrapper center_2 justify_space" *ngIf="count_list.length > 0">
+                <div class="tab_1 center_2 justify_space">
+                    <button type="button" mat-button class="tab_wrapper_li" *ngFor="let data of count_list;"
+                        (click)="lead_type_change(data.lead_type);"
+                        [ngClass]="{'active': inquiries_obj.lead_type == data.lead_type, 'bg_green': data.bg_color == 'green'}">
+                        <p class="tab_wrapper_li_p">
+                            {{data.title}}
+                        </p>
+                        <p class="tab_wrapper_li_p_c">
+                            {{data.total}}
+                        </p>
+                        <div class="tab_lead_value"
+                            *ngIf="inquiries_obj.lead_type == data.lead_type && data.lead_value">
+                            <p class="tab_lead_value_p color_warm">
+                                {{data.lead_value}}
+                            </p>
+                        </div>
+                    </button>
+                    <!-- <button type="button" mat-button class="tab_wrapper_li">
+                        <p class="tab_wrapper_li_p">
+                            All
+                        </p>
+                        <p class="tab_wrapper_li_p_c">
+                            20
+                        </p>
+                    </button>
+                    <button type="button" mat-button class="tab_wrapper_li">
+                        <p class="tab_wrapper_li_p">
+                            New Lead
+                        </p>
+                        <p class="tab_wrapper_li_p_c">
+                            2
+                        </p>
+                    </button>
+                    <button type="button" mat-button class="tab_wrapper_li">
+                        <p class="tab_wrapper_li_p">
+                            Today's Followup
+                        </p>
+                        <p class="tab_wrapper_li_p_c">
+                            5
+                        </p>
+                    </button>
+                    <button type="button" mat-button class="tab_wrapper_li">
+                        <p class="tab_wrapper_li_p">
+                            Overdue
+                        </p>
+                        <p class="tab_wrapper_li_p_c">
+                            5
+                        </p>
+                    </button>
+                    <button type="button" mat-button class="tab_wrapper_li">
+                        <p class="tab_wrapper_li_p">
+                            Lost
+                        </p>
+                        <p class="tab_wrapper_li_p_c">
+                            3
+                        </p>
+                    </button> -->
+                </div>
+                <div class="tab_all_wrapper">
+                    <button type="button" routerLink="/inquiries" mat-button
+                        class="tab_wrapper_li tab_wrapper_li_view_all">
+                        <p class="tab_wrapper_li_p tab_wrapper_li_p_view_all">
+                            View All
+                        </p>
+                        <p class="tab_wrapper_li_p_c">
+                            <mat-icon class="color_white">arrow_forward</mat-icon>
+                        </p>
+                    </button>
+                </div>
+            </div>
+        </ng-container>
+        <ng-container *ngIf="!isLoading">
+            <div class="table_wrapper" [ngClass]="{'top_tile_active': router.url == '/dashboard'}">
+                <table class="width_100">
+                    <tr class="table_th">
+                        <ng-container *ngIf="!inquiry_assign_f">
+                            <th style="padding-left: 10px;width: 50px;">#</th>
+                        </ng-container>
+                        <ng-container *ngIf="inquiry_assign_f">
+                            <th style="padding-left: 10px;">
+                                <div class="center_2">
+                                    <mat-checkbox class="blue_checkbox" [(ngModel)]="check_all_check"
+                                        (click)="check_all_inquiries()"></mat-checkbox>
+                                    <a href="javascript:void(0);" class="date_close_icon" mat-button
+                                        (click)="inquiry_assign();">
+                                        <mat-icon>close</mat-icon>
+                                    </a>
+                                </div>
+                            </th>
+                        </ng-container>
+                        <th style="width: 14%;">
+                            <p class="text">Contact Person</p>
+                        </th>
+                        <th style="width: 14%;">
+                            <div class="center_2">
+                                <p class="text">State/City</p>
+                                <ng-container *ngIf="state_list_for_filter.length > 0">
+                                    <button class="filter_icon_wrapper" type="button" mat-icon-button
+                                        [matMenuTriggerFor]="sales_status">
+                                        <mat-icon class="filter_icon_table">filter_list</mat-icon>
+                                        <div class="filter_active" *ngIf="filter_check.state_check"></div>
+                                    </button>
+                                    <mat-menu #sales_status="matMenu" xPosition="before">
+                                        <div class="filter_box_wrapper">
+                                            <div class="filter_box_li" *ngFor="let data of state_list_for_filter;"
+                                                (click)="$event.stopPropagation();">
+                                                <mat-checkbox [(ngModel)]="data.checked"
+                                                    class="capitalize white_space_remove_checkbox">{{data.name}}</mat-checkbox>
+                                            </div>
+                                        </div>
+                                        <div class="filter_btn_wrapper center_2 justify_space">
+                                            <button type="button" class="width_100" (click)="state_filter_clear();"
+                                                mat-button>Clear</button>
+                                            <button type="button" class="width_100"
+                                                (click)="inquiries_get('filter_apply');" mat-button>Apply</button>
+                                        </div>
+                                    </mat-menu>
+                                </ng-container>
+                            </div>
+                        </th>
+                        <th style="width: 14%;">
+                            <div class="center_2">
+                                <p class="text">Sales Name</p>
+                                <ng-container *ngIf="sales_list.length > 0 && store_data.type == 'admin'">
+                                    <button class="filter_icon_wrapper" type="button" mat-icon-button
+                                        [matMenuTriggerFor]="sales_status">
+                                        <mat-icon class="filter_icon_table">filter_list</mat-icon>
+                                        <div class="filter_active" *ngIf="filter_check.sales_check"></div>
+                                    </button>
+                                    <mat-menu #sales_status="matMenu" xPosition="before">
+                                        <div class="filter_box_wrapper">
+                                            <div class="filter_box_li" *ngFor="let data of sales_list;"
+                                                (click)="$event.stopPropagation();">
+                                                <mat-checkbox [(ngModel)]="data.checked"
+                                                    class="capitalize">{{data.name}}</mat-checkbox>
+                                            </div>
+                                        </div>
+                                        <div class="filter_btn_wrapper center_2 justify_space">
+                                            <button type="button" class="width_100" (click)="sales_filter_clear();"
+                                                mat-button>Clear</button>
+                                            <button type="button" class="width_100"
+                                                (click)="inquiries_get('filter_apply');" mat-button>Apply</button>
+                                        </div>
+                                    </mat-menu>
+                                </ng-container>
+                            </div>
+                        </th>
+                        <th style="width: 14%;">
+                            <div class="center_2">
+                                <p class="text">Plant Name</p>
+                                <ng-container *ngIf="plant_list.length > 0">
+                                    <button class="filter_icon_wrapper" type="button" mat-icon-button
+                                        [matMenuTriggerFor]="plant_status">
+                                        <mat-icon class="filter_icon_table">filter_list</mat-icon>
+                                        <div class="filter_active" *ngIf="filter_check.plant_check"></div>
+                                    </button>
+                                    <mat-menu #plant_status="matMenu" xPosition="before">
+                                        <div class="filter_box_wrapper">
+                                            <div class="filter_box_li" *ngFor="let data of plant_list;"
+                                                (click)="$event.stopPropagation();">
+                                                <mat-checkbox [(ngModel)]="data.checked">{{data.name}}</mat-checkbox>
+                                            </div>
+                                        </div>
+                                        <div class="filter_btn_wrapper center_2 justify_space">
+                                            <button type="button" class="width_100" (click)="plant_filter_clear();"
+                                                mat-button>Clear</button>
+                                            <button type="button" class="width_100"
+                                                (click)="inquiries_get('filter_apply');" mat-button>Apply</button>
+                                        </div>
+                                    </mat-menu>
+                                </ng-container>
+                            </div>
+                        </th>
+                        <th style="width: 14%;">
+                            <!-- <p class="text">Quotation Number</p> -->
+                            <p class="text">Company</p>
+                        </th>
+                        <th style="width: 14%;">
+                            <p class="text">Lead Value</p>
+                        </th>
+                        <th style="width: 180px;">
+                            <div class="center_2">
+                                <p class="text">Status</p>
+                                <button class="filter_icon_wrapper" type="button" mat-icon-button
+                                    [matMenuTriggerFor]="filter_status">
+                                    <mat-icon class="filter_icon_table">filter_list</mat-icon>
+                                    <div class="filter_active" *ngIf="filter_check.status_check"></div>
+                                </button>
+                                <mat-menu #filter_status="matMenu" xPosition="before">
+                                    <div class="filter_box_wrapper">
+                                        <div class="filter_box_li" *ngFor="let data of status_list;"
+                                            (click)="$event.stopPropagation();">
+                                            <mat-checkbox [(ngModel)]="data.checked">{{data.name}}</mat-checkbox>
+                                        </div>
+                                    </div>
+                                    <div class="filter_btn_wrapper center_2 justify_space">
+                                        <button type="button" class="width_100" (click)="status_filter_clear();"
+                                            mat-button>Clear</button>
+                                        <button type="button" class="width_100" (click)="inquiries_get('filter_apply');"
+                                            mat-button>Apply</button>
+                                    </div>
+                                </mat-menu>
+                            </div>
+                        </th>
+                        <th style="width: 180px;">
+                            <div class="center_2">
+                                <p class="text">Priority</p>
+                                <button class="filter_icon_wrapper" type="button" mat-icon-button
+                                    [matMenuTriggerFor]="filter_priority">
+                                    <mat-icon class="filter_icon_table">filter_list</mat-icon>
+                                    <div class="filter_active" *ngIf="filter_check.priority_check"></div>
+                                </button>
+                                <mat-menu #filter_priority="matMenu" xPosition="before">
+                                    <div class="filter_box_wrapper">
+                                        <div class="filter_box_li" *ngFor="let data of priority_list;"
+                                            (click)="$event.stopPropagation();">
+                                            <mat-checkbox [(ngModel)]="data.checked">{{data.name}}</mat-checkbox>
+                                        </div>
+                                    </div>
+                                    <div class="filter_btn_wrapper center_2 justify_space">
+                                        <button type="button" class="width_100" (click)="priority_filter_clear();"
+                                            mat-button>Clear</button>
+                                        <button type="button" class="width_100" (click)="inquiries_get('filter_apply');"
+                                            mat-button>Apply</button>
+                                    </div>
+                                </mat-menu>
+                            </div>
+                        </th>
+                        <th style="width: 160px;">
+                            <div class="center_2">
+                                <p class="text">FollowUp Date</p>
+                                <!-- <ng-container
+                                    *ngIf="router.url == '/dashboard' && inquiries_obj.lead_type == 'upcoming_followUp_lead'">
+                                    <button class="filter_icon_wrapper" type="button" mat-icon-button
+                                        [matMenuTriggerFor]="filter_upcoming">
+                                        <mat-icon class="filter_icon_table">filter_list</mat-icon>
+                                        <div class="filter_active" *ngIf="show_upcoming_followUp_dis"></div>
+                                    </button>
+                                    <mat-menu #filter_upcoming="matMenu" xPosition="before">
+                                        <div class="filter_box_wrapper">
+                                            <div class="filter_box_li" (click)="$event.stopPropagation();">
+                                                <mat-checkbox [(ngModel)]="show_upcoming_followUp_dis">Show FollowUp Lead</mat-checkbox>
+                                            </div>
+                                        </div>
+                                        <div class="filter_btn_wrapper center_2 justify_space">
+                                            <button type="button" class="width_100" (click)="upcoming_filter_clear();"
+                                                mat-button>Clear</button>
+                                            <button type="button" class="width_100" (click)="inquiries_get('filter_apply');"
+                                                mat-button>Apply</button>
+                                        </div>
+                                    </mat-menu>
+                                </ng-container> -->
+                            </div>
+                        </th>
+                        <th style="width: 120px;">
+                            <p class="text">Inquiry Date</p>
+                        </th>
+                        <th style="width: 40px;"></th>
+                    </tr>
+                    <ng-container *ngIf="inquiry_list.length > 0">
+                        <tr class="table_tr" [ngClass]="{'overdue': data.overdue == 1}"
+                            *ngFor="let data of inquiry_list;let i = index;">
+                            <ng-container *ngIf="!inquiry_assign_f">
+                                <td style="padding-left: 10px;width: 50px;">
+                                    {{data.id}}
+                                </td>
+                            </ng-container>
+                            <ng-container *ngIf="inquiry_assign_f">
+                                <td style="padding-left: 10px;">
+                                    <mat-checkbox [(ngModel)]="data.checked"
+                                        (click)="check_one_inquiry(data)"></mat-checkbox>
+                                </td>
+                            </ng-container>
+                            <td style="width: 14%;">
+                                <p class="font_medium capitalize pb_6 color_black">
+                                    {{data.name}}
+                                </p>
+                                <!-- <div class="center_2"> -->
+                                <p class="font_regular color_gray">
+                                    +{{data.contact_no}}
+                                </p>
+                                <!-- <a href="https://wa.me/{{data.contact_no.replace(' ', '')}}" target="_blank">
+                                        <mat-icon>chat</mat-icon>
+                                        <mat-icon>chat_bubble_outline</mat-icon>
+                                    </a> -->
+                                <!-- </div> -->
+                            </td>
+                            <td style="width: 14%;">
+                                <p class="pb_6" *ngIf="data.state_name">
+                                    {{data.state_name}}
+                                </p>
+                                <p *ngIf="data.city_name">
+                                    ({{data.city_name}})
+                                </p>
+                                <p *ngIf="!data.state_name">
+                                    --
+                                </p>
+                            </td>
+                            <td style="width: 14%;">
+                                <p class="capitalize" *ngIf="data.assign_master_user_name">
+                                    {{data.assign_master_user_name}}
+                                </p>
+                                <p *ngIf="!data.assign_master_user_name">
+                                    --
+                                </p>
+                            </td>
+                            <td style="width: 14%;">
+                                <p *ngIf="data.plant_city_name">
+                                    {{data.plant_city_name}}
+                                </p>
+                                <p *ngIf="!data.plant_city_name">
+                                    --
+                                </p>
+                            </td>
+                            <td style="width: 14%;">
+                                <!-- <p *ngIf="data.quotation_number">
+                                    {{data.quotation_number}}
+                                </p>
+                                <p *ngIf="!data.quotation_number">
+                                    --
+                                </p> -->
+                                <p *ngIf="data.company_name">
+                                    {{data.company_name}}
+                                </p>
+                                <p *ngIf="!data.company_name">
+                                    --
+                                </p>
+                            </td>
+                            <td style="width: 14%;">
+                                <p *ngIf="data.lead_value">
+                                    {{data.lead_value}}
+                                </p>
+                                <p *ngIf="!data.lead_value">
+                                    --
+                                </p>
+                            </td>
+                            <td style="width: 180px;">
+                                <!-- <ng-container *ngIf="data.status == 'Customer'">
+                                    <mat-chip-list aria-label="Fish selection">
+                                        <mat-chip class="customer_chip">
+                                            <p class="font_medium color_white">
+                                                {{data.status}}
+                                            </p>
+                                        </mat-chip>
+                                    </mat-chip-list>
+                                </ng-container>
+                                <ng-container *ngIf="data.status != 'Customer'"> -->
+                                <p class="font_medium pb_6">
+                                    {{data.status}}
+                                </p>
+                                <ng-container *ngIf="data.is_big_buyer == '1'">
+                                    <p class="font_12 color_gray">
+                                        (Big buyer)
+                                    </p>
+                                </ng-container>
+                                <!-- </ng-container> -->
+                            </td>
+                            <td style="width: 180px;">
+                                <p class="font_regular capitalize"
+                                    [ngClass]="{'color_hot': data.priority == 'hot', 'color_cold': data.priority == 'cold', 'color_warm': data.priority == 'warm'}">
+                                    {{data.priority}}
+                                </p>
+                            </td>
+                            <td style="width: 160px;">
+                                <ng-container *ngIf="data.followUp_date.created_at">
+                                    <p class="font_regular color_black font_14 line_1_4">
+                                        {{data.followUp_date.created_at.replace(' ', '&nbsp;').replace(' ', '&nbsp;')}}
+                                    </p>
+                                    <p class="color_gray font_regular font_14 line_1_4">
+                                        {{data.followUp_date.created_at_time}}
+                                    </p>
+                                </ng-container>
+                                <p class="font_regular font_14" *ngIf="!data.followUp_date.created_at">
+                                    --
+                                </p>
+                            </td>
+                            <td style="width: 120px;" class="line_1_4">
+                                {{data.created_at.replace(' ', '&nbsp;').replace(' ', '&nbsp;')}}<br />
+                                <p class="color_gray font_regular">{{data.created_at_time}}</p>
+                            </td>
+                            <td class="last_column_td">
+                                <ng-container *ngIf="data.lead_rights.lead_edit || data.lead_rights.lead_followUp">
+                                    <button mat-icon-button [matMenuTriggerFor]="more_option">
+                                        <mat-icon>more_vert</mat-icon>
+                                    </button>
+                                    <mat-menu #more_option="matMenu" xPosition="before">
+                                        <ng-container *ngIf="data.lead_rights.lead_edit">
+                                            <button [routerLink]="'/inquiry/update/'+decodeValue(data.id)" type="button"
+                                                mat-menu-item>
+                                                <div class="center_2">
+                                                    <mat-icon class="more_option_icon">edit</mat-icon>
+                                                    <p class="font_16 color_black font_regular">
+                                                        Edit
+                                                    </p>
+                                                </div>
+                                            </button>
+                                        </ng-container>
+                                        <ng-container *ngIf="data.lead_rights.lead_delete">
+                                            <button type="button" (click)="lead_remove(data.id);" mat-menu-item>
+                                                <div class="center_2">
+                                                    <mat-icon class="more_option_icon">delete_outline</mat-icon>
+                                                    <p class="font_16 color_black font_regular">
+                                                        Delete
+                                                    </p>
+                                                </div>
+                                            </button>
+                                        </ng-container>
+                                        <a href="https://wa.me/{{data.contact_no.replace(' ', '')}}" target="_blank"
+                                            class="btn_href" mat-menu-item>
+                                            <div class="center_2">
+                                                <mat-icon class="more_option_icon">chat_bubble_outline</mat-icon>
+                                                <p class="font_16 color_black font_regular">
+                                                    WhatsApp
+                                                </p>
+                                            </div>
+                                        </a>
+                                        <ng-container *ngIf="data.lead_rights.lead_followUp">
+                                            <button type="button" (click)="openConfirmationDialog(data)" mat-menu-item>
+                                                <div class="center_2">
+                                                    <mat-icon class="more_option_icon">add</mat-icon>
+                                                    <p class="font_16 color_black font_regular">
+                                                        Add FollowUp
+                                                    </p>
+                                                </div>
+                                            </button>
+                                        </ng-container>
+                                        <ng-container *ngIf="data.lead_rights.send_custom_email == 1">
+                                            <button type="button" (click)="openBigBuyerEmailDialog(data)" mat-menu-item>
+                                                <div class="center_2">
+                                                    <mat-icon class="more_option_icon">email</mat-icon>
+                                                    <p class="font_16 color_black font_regular">
+                                                        Send Email
+                                                    </p>
+                                                </div>
+                                            </button>
+                                        </ng-container>
+                                        <button type="button" (click)="openHistoryDialog(data)" mat-menu-item>
+                                            <div class="center_2">
+                                                <mat-icon class="more_option_icon">history</mat-icon>
+                                                <p class="font_16 color_black font_regular">
+                                                    View History
+                                                </p>
+                                            </div>
+                                        </button>
+                                        <button type="button" (click)="transfer_lead(data.id)" mat-menu-item>
+                                            <div class="center_2">
+                                                <mat-icon class="more_option_icon">assignment_ind</mat-icon>
+                                                <p class="font_16 color_black font_regular">
+                                                    Assign To
+                                                </p>
+                                            </div>
+                                        </button>
+                                    </mat-menu>
+                                </ng-container>
+                                <ng-container *ngIf="!data.lead_rights.lead_edit && !data.lead_rights.lead_followUp">
+                                    <p class="font_regular">
+                                        --
+                                    </p>
+                                </ng-container>
+                            </td>
+                        </tr>
+                    </ng-container>
+                </table>
+            </div>
+        </ng-container>
+        <ng-container *ngIf="!inquiry_list.length && !isLoading">
+            <div class="no_record_text">
+                <div class="text-center">
+                    <div class="no_record_search_icon">
+                        <mat-icon>search</mat-icon>
+                    </div>
+                    <p class="font_20 color_gray font_medium">
+                        Lead Data Not Found
+                    </p>
+                </div>
+            </div>
+        </ng-container>
+        <ng-container *ngIf="isLoading">
+            <div class="record_load_spinner">
+                <button type="button" class="record_load_spinner_box" mat-raised-button>
+                    <mat-spinner></mat-spinner>
+                </button>
+
+            </div>
+        </ng-container>
+        <!-- <ng-container *ngIf="inquiry_list.length > 0 && !isLoading"> -->
+        <mat-paginator class="paginator_wrapper " [length]="total_record" [pageSize]="inquiries_obj.limit"
+            [pageSizeOptions]="pageSizeOptions" (page)="pageEvent = $event; onPageChange($event);"
+            [showFirstLastButtons]="true">
+        </mat-paginator>
+        <!-- </ng-container> -->
+    </div>
+</div>

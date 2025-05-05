@@ -1,0 +1,187 @@
+<div class="pages_wrapper">
+    <div class="form_width_wrapper">
+        <div class="col-lg-12">
+            <div class="title_wrapper form_title_wrapper mb_0_im">
+                <div class="center_2">
+                    <ng-container *ngIf="activePath == 'profile/update'">
+                        <h1 class="font_24 color_black font_medium">
+                            Personal info
+                        </h1>
+                    </ng-container>
+                    <ng-container *ngIf="activePath == 'profile/password/update'">
+                        <h1 class="font_24 color_black font_medium">
+                            Password
+                        </h1>
+                    </ng-container>
+                    <div class="mr_auto"></div>
+                    <div class="more_menu_option_wrapper">
+                        <button class="more_menu_option_btn" mat-stroked-button [matMenuTriggerFor]="more_menu_option">
+                            <mat-icon>apps</mat-icon>
+                        </button>
+                        <mat-menu class="more_menu_div" #more_menu_option="matMenu" xPosition="before">
+                            <div class="center_3">
+                                <a routerLink="/profile/update" mat-button class="more_menu_li">
+                                    <div class="more_menu_li_icon">
+                                        <mat-icon>person</mat-icon>
+                                    </div>
+                                    <div class="more_menu_li_p">
+                                        <p class="font_16 color_gray font_regular">
+                                            Personal info
+                                        </p>
+                                    </div>
+                                </a>
+                                <a routerLink="/profile/password/update" mat-button class="more_menu_li">
+                                    <div class="more_menu_li_icon">
+                                        <mat-icon>lock</mat-icon>
+                                    </div>
+                                    <div class="more_menu_li_p">
+                                        <p class="font_16 color_gray font_regular">
+                                            Change Password
+                                        </p>
+                                    </div>
+                                </a>
+                            </div>
+                        </mat-menu>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="border_form_wrapper">
+            <div class="border_form"></div>
+        </div>
+        <ng-container *ngIf="!isLoadingDetails">
+            <div class="col-lg-12">
+                <ng-container *ngIf="activePath == 'profile/update'">
+                    <form name="form" (ngSubmit)="profileForm.form.valid && SubmitProfileForm()" #profileForm="ngForm"
+                        novalidate>
+                        <div class="form_wrapper">
+                            <div class="col-lg-12">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <mat-form-field appearance="fill">
+                                            <mat-label class="font_16 line_1_2 font_regular">Name</mat-label>
+                                            <input type="text" id="name" name="name" [(ngModel)]="profile_obj.name"
+                                                [ngClass]="{ 'is-invalid': profileForm.submitted && name.invalid }"
+                                                #name="ngModel" autocomplete="off" required="required" maxlength="100"
+                                                matInput>
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <mat-form-field appearance="fill">
+                                            <mat-label class="font_16 line_1_2 font_regular">Mobile No.</mat-label>
+                                            <input type="tel" id="contact_no" name="contact_no"
+                                                [(ngModel)]="profile_obj.contact_no"
+                                                [ngClass]="{ 'is-invalid': profileForm.submitted && contact_no.invalid }"
+                                                #contact_no="ngModel" autocomplete="off" required="required" onlyNumber
+                                                minlength="10" maxlength="10" matInput>
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <mat-form-field appearance="fill">
+                                            <mat-label class="font_16 line_1_2 font_regular">Email ID</mat-label>
+                                            <input type="email" id="email_address" name="email_address"
+                                                [(ngModel)]="profile_obj.email_address"
+                                                [ngClass]="{ 'is-invalid': profileForm.submitted && email_address.invalid }"
+                                                #email_address="ngModel" autocomplete="off" required="required"
+                                                maxlength="255" [pattern]="emailPattern" matInput>
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <mat-form-field appearance="fill">
+                                            <mat-label class="font_16 line_1_2 font_regular">Upload Profile</mat-label>
+                                            <input type="file" (change)="onFileSelected($event)" name="profile_image_file"
+                                                [(ngModel)]="profile_obj.profile_image_file" #fileInput accept=".jpg, .jpeg, .png"
+                                                hidden>
+                                            <mat-icon type="button" class="file_attach_icon" mat-button
+                                                (click)="openFileInput()" matSuffix>attach_file</mat-icon>
+                                            <input matInput [value]="fileInput.files && fileInput.files[0]?.name || ''"
+                                                readonly>
+                                            <!-- <button type="button" mat-button (click)="openFileInput()" matSuffix><mat-icon>attach_file</mat-icon></button> -->
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="col-lg-12" *ngIf="profile_obj.profile_image_full && !previewImageUrl">
+                                        <img alt="Triranga Infra" class="img-responsive" src="{{profile_obj.profile_image_full}}&h=100&w=100" style="border-radius: 6px;">
+                                    </div>
+                                    <div class="col-lg-12" *ngIf="profile_obj.profile_image_full">
+                                        <img alt="Triranga Infra" class="img-responsive previewImageUrl_image" *ngIf="previewImageUrl" [src]="previewImageUrl" style="border-radius: 6px;">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <button type="submit" class="submit_btn submit_btn_login" mat-button
+                                [disabled]="isSubmitted">
+                                <div class="center_2 justify_center">
+                                    <p class="font_18 color_white line_1">
+                                        {{button_text}}
+                                    </p>
+                                    <ng-container *ngIf="isSubmitted">
+                                        <mat-spinner class="login_spinner"></mat-spinner>
+                                    </ng-container>
+                                </div>
+                            </button>
+                        </div>
+                    </form>
+                </ng-container>
+                <ng-container *ngIf="activePath == 'profile/password/update'">
+                    <form name="form" (ngSubmit)="profilePasswordForm.form.valid && SubmitProfilePasswordForm()"
+                        #profilePasswordForm="ngForm" novalidate>
+                        <div class="form_wrapper">
+                            <div class="col-lg-12">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <mat-form-field appearance="fill">
+                                            <mat-label class="font_16 font_regular">Password</mat-label>
+                                            <input id="password" name="password" [(ngModel)]="profile_obj.password"
+                                                [ngClass]="{ 'is-invalid': profilePasswordForm.submitted && password.invalid }"
+                                                #password="ngModel" autocomplete="off" required="required" matInput
+                                                [type]="hide ? 'text' : 'password'">
+                                            <button type="button" mat-icon-button matSuffix (click)="hide = !hide"
+                                                [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                                                <mat-icon>{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+                                            </button>
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <mat-form-field appearance="fill">
+                                            <mat-label class="font_16 font_regular">Confirm Password</mat-label>
+                                            <input id="confirm_password" name="confirm_password"
+                                                [(ngModel)]="profile_obj.confirm_password"
+                                                [ngClass]="{ 'is-invalid': profilePasswordForm.submitted && confirm_password.invalid }"
+                                                #confirm_password="ngModel" autocomplete="off" required="required"
+                                                matInput [type]="hide2 ? 'text' : 'password'">
+                                            <button type="button" mat-icon-button matSuffix (click)="hide2 = !hide2"
+                                                [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide2">
+                                                <mat-icon>{{hide2 ? 'visibility' : 'visibility_off'}}</mat-icon>
+                                            </button>
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <button type="submit" class="submit_btn submit_btn_login" mat-button
+                                [disabled]="isSubmitted">
+                                <div class="center_2 justify_center">
+                                    <p class="font_18 color_white line_1">
+                                        {{button_text}}
+                                    </p>
+                                    <ng-container *ngIf="isSubmitted">
+                                        <mat-spinner class="login_spinner"></mat-spinner>
+                                    </ng-container>
+                                </div>
+                            </button>
+                        </div>
+                    </form>
+                </ng-container>
+            </div>
+        </ng-container>
+        <ng-container *ngIf="isLoadingDetails">
+            <div class="record_load_spinner">
+                <button type="button" class="record_load_spinner_box" mat-raised-button>
+                    <mat-spinner></mat-spinner>
+                </button>
+            </div>
+        </ng-container>
+    </div>
+</div>

@@ -1,0 +1,96 @@
+<div class="top_bar_wrapper">
+    <!-- <button mat-button class="menu-button menu_button">
+        <mat-icon>{{ isMenuOpen ? 'menu_open' : 'menu' }}</mat-icon>
+    </button> -->
+    <button mat-icon-button class="menu-button menu_button vertical_icon" (click)="click_menu_from_master()">
+        <mat-icon class="vertical_icon">{{ menu_open_f ? 'menu_open' : 'menu' }}</mat-icon>
+    </button>
+    <div class="top_bar_logo">
+        <img alt="Triranga Infra" src="assets/images/logo_2.svg" class="img-responsive">
+    </div>
+    <!-- <p class="top_bar_logo_text">
+        Triranga Infra
+    </p> -->
+    <div class="mr_auto"></div>
+    <div class="top_bar_profile_tab">
+        <button mat-button [matMenuTriggerFor]="menu_profile" class="profile_tab_button">
+            <div class="center_2">
+                <p class="mat_menu_p">
+                    {{store_data.name}}
+                </p>
+                <p class="mat_menu_p_2" *ngIf="!store_data.profile_image">
+                    {{store_data.name_small}}
+                </p>
+                <img alt="Triranga Infra" class="img-responsive profile_image_1"
+                    src="{{store_data.profile_image_full}}&h=32&w=32" *ngIf="store_data.profile_image">
+            </div>
+        </button>
+        <mat-menu class="menu_profile_div" #menu_profile="matMenu" xPosition="before">
+            <div class="menu_profile_div_1">
+                <div class="menu_profile_text" [class.active]="!store_data.profile_image">
+                    <p *ngIf="!store_data.profile_image">
+                        {{store_data.name_small}}
+                    </p>
+                    <img alt="Triranga Infra" class="img-responsive" src="{{store_data.profile_image_full}}&h=80&w=80"
+                        *ngIf="store_data.profile_image">
+                </div>
+                <div class="text-center">
+                    <p class="font_16 font_regular color_gray capitalize pb_4">
+                        {{store_data.name}}
+                    </p>
+                    <p class="font_16 font_regular color_gray">
+                        {{store_data.email_address}}
+                    </p>
+                </div>
+                <div class="center_2">
+                    <a routerLink="/profile/update" class="menu_account_btn" mat-stroked-button>
+                        Manage Your Account
+                    </a>
+                </div>
+            </div>
+            <div class="menu_profile_div_2 center_2">
+                <button class="logout_btn" mat-raised-button (click)="logout();">
+                    <div class="center_2">
+                        <p>
+                            Sign out
+                        </p>
+                        <mat-icon>{{'logout'}}</mat-icon>
+                    </div>
+                </button>
+            </div>
+        </mat-menu>
+    </div>
+</div>
+
+<div class="side_bar_wrapper" [ngClass]="{'active': menu_open_f}">
+    <div class="side_bar_ul">
+        <div class="side_bar_li">
+            <a routerLink="/dashboard" class="side_bar_li_a"
+                [ngClass]="{'active': (router.url == '/dashboard' || router_obj.flag == 'inquiry')}" mat-button>
+                <p class="side_bar_li_p">
+                    Dashboard
+                </p>
+            </a>
+        </div>
+        <ng-container *ngIf="store_data.type == 'admin'">
+            <div class="side_bar_li">
+                <a routerLink="/team" class="side_bar_li_a"
+                    [ngClass]="{'active': (router.url == '/team' || router_obj.flag == 'team')}" mat-button>
+                    <p class="side_bar_li_p">
+                        Team
+                    </p>
+                </a>
+            </div>
+        </ng-container>
+        <ng-container *ngIf="store_data.type == 'admin'">
+            <div class="side_bar_li">
+                <a routerLink="/import-leads" class="side_bar_li_a"
+                    [ngClass]="{'active': (router.url == '/import-leads')}" mat-button>
+                    <p class="side_bar_li_p">
+                        Import Leads
+                    </p>
+                </a>
+            </div>
+        </ng-container>
+    </div>
+</div>
