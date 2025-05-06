@@ -81,7 +81,6 @@ export class DashboardComponent implements OnInit {
         this.sales_get();
         this.state_get_for_filter();
         this.filter_applyed = false;
-        this.selectedFinancialYear = this.getCurrentFinancialYear();
         this.financialyear = this.generateFinancialYears();
     }
 
@@ -188,6 +187,7 @@ export class DashboardComponent implements OnInit {
             status: [{}]
         },
         show_upcoming_followUp: 0,
+        financial_year: this.getCurrentFinancialYear(),
     };
     public filter_check: any = {
         status_check: false,
@@ -288,9 +288,11 @@ export class DashboardComponent implements OnInit {
         if (this.show_upcoming_followUp_dis) {
             this.inquiries_obj.show_upcoming_followUp = 1;
         }
+
         const obj = this.inquiries_obj;
         const mapped = Object.keys(obj).map(key => ({ type: key, value: obj[key] }));
         this.inquiries_obj.export = 0;
+
         this.MasterService.inquiries_list(mapped).subscribe(res => {
             var response = JSON.parse(JSON.stringify(res));
             if (!this.export) {
@@ -852,7 +854,6 @@ export class DashboardComponent implements OnInit {
     // Financial Year
 
     financialyear: { value: string; viewValue: string }[] = [];
-
     selectedFinancialYear: string = '';
 
     getCurrentFinancialYear(): string {
@@ -865,27 +866,22 @@ export class DashboardComponent implements OnInit {
             return `${year - 1}-${year}`;
         }
     }
-    generateFinancialYears(): { value: string; viewValue: string }[] {
+    generateFinancialYears(startYear: number = 2022): { value: string; viewValue: string }[] {
         const years: { value: string; viewValue: string }[] = [];
-        const startYear = 2022;
+
         const currentFY = this.getCurrentFinancialYear();
         const currentStartYear = parseInt(currentFY.split('-')[0]);
-    
+
         for (let year = currentStartYear; year >= startYear; year--) {
             const fy = `${year}-${year + 1}`;
             years.push({ value: fy, viewValue: fy });
         }
-    
+
         return years;
     }
-    
+
 
     trackyear(index: number, financial: any): any {
         return financial.value;
-    }
-
-    onFinancialYearChange(selected: string) {
-        console.log('Financial year changed to:', selected);
-
     }
 }

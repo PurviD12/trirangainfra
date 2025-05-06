@@ -228,35 +228,54 @@ class Front_model extends CI_Model {
                 }
             }
             
+            // $spreadsheet->setActiveSheetIndex(0)->getStyle(1)->applyFromArray($styleArray);
+            // $spreadsheet->setActiveSheetIndex(0)->setCellValueByColumnAndRow(1,1,'ID');
+            // $spreadsheet->setActiveSheetIndex(0)->setCellValueByColumnAndRow(2,1,'Date');
+            // $spreadsheet->setActiveSheetIndex(0)->setCellValueByColumnAndRow(3,1,'Sales Name');
+            // $spreadsheet->setActiveSheetIndex(0)->setCellValueByColumnAndRow(4,1,'Name');
+            // $spreadsheet->setActiveSheetIndex(0)->setCellValueByColumnAndRow(5,1,'Contact No.');
+            // $spreadsheet->setActiveSheetIndex(0)->setCellValueByColumnAndRow(6,1,'Email');
+            // $spreadsheet->setActiveSheetIndex(0)->setCellValueByColumnAndRow(7,1,'Order Date');
+            // $spreadsheet->setActiveSheetIndex(0)->setCellValueByColumnAndRow(8,1,'Status');
+            // $spreadsheet->setActiveSheetIndex(0)->setCellValueByColumnAndRow(9,1,'Is Big Buyer');
+            // $spreadsheet->setActiveSheetIndex(0)->setCellValueByColumnAndRow(10,1,'Company Name');
+            // $spreadsheet->setActiveSheetIndex(0)->setCellValueByColumnAndRow(11,1,'Designation');
+            // $spreadsheet->setActiveSheetIndex(0)->setCellValueByColumnAndRow(12,1,'State');
+            // $spreadsheet->setActiveSheetIndex(0)->setCellValueByColumnAndRow(13,1,'City');
+            // $spreadsheet->setActiveSheetIndex(0)->setCellValueByColumnAndRow(14,1,'Village');
+            // $spreadsheet->setActiveSheetIndex(0)->setCellValueByColumnAndRow(15,1,'Priority');
+            // $spreadsheet->setActiveSheetIndex(0)->setCellValueByColumnAndRow(16,1,'Company Website');
+            // $spreadsheet->setActiveSheetIndex(0)->setCellValueByColumnAndRow(17,1,'Unit');
+            // $spreadsheet->setActiveSheetIndex(0)->setCellValueByColumnAndRow(18,1,'Quantity');
+            // $spreadsheet->setActiveSheetIndex(0)->setCellValueByColumnAndRow(19,1,'Nos Of Column');
+            // $spreadsheet->setActiveSheetIndex(0)->setCellValueByColumnAndRow(20,1,'Nos Of Panel');
+            // $spreadsheet->setActiveSheetIndex(0)->setCellValueByColumnAndRow(21,1,'Height');
+            // $spreadsheet->setActiveSheetIndex(0)->setCellValueByColumnAndRow(22,1,'Lead Value');
+            // $spreadsheet->setActiveSheetIndex(0)->setCellValueByColumnAndRow(23,1,'Quotation Number');
+            // $spreadsheet->setActiveSheetIndex(0)->setCellValueByColumnAndRow(24,1,'Source');
+            // $spreadsheet->setActiveSheetIndex(0)->setCellValueByColumnAndRow(25,1,'Other Source');
+            // $spreadsheet->setActiveSheetIndex(0)->setCellValueByColumnAndRow(26,1,'From Which Plant');
+            // $spreadsheet->setActiveSheetIndex(0)->setCellValueByColumnAndRow(27,1,'Remarks');
+            /*$spreadsheet->setActiveSheetIndex(0)->setCellValueByColumnAndRow(28,1,'Attachment');*/
+
             $spreadsheet->setActiveSheetIndex(0)->getStyle(1)->applyFromArray($styleArray);
             $spreadsheet->setActiveSheetIndex(0)->setCellValueByColumnAndRow(1,1,'ID');
             $spreadsheet->setActiveSheetIndex(0)->setCellValueByColumnAndRow(2,1,'Date');
             $spreadsheet->setActiveSheetIndex(0)->setCellValueByColumnAndRow(3,1,'Sales Name');
-            $spreadsheet->setActiveSheetIndex(0)->setCellValueByColumnAndRow(4,1,'Name');
-            $spreadsheet->setActiveSheetIndex(0)->setCellValueByColumnAndRow(5,1,'Contact No.');
-            $spreadsheet->setActiveSheetIndex(0)->setCellValueByColumnAndRow(6,1,'Email');
-            $spreadsheet->setActiveSheetIndex(0)->setCellValueByColumnAndRow(7,1,'Order Date');
-            $spreadsheet->setActiveSheetIndex(0)->setCellValueByColumnAndRow(8,1,'Status');
-            $spreadsheet->setActiveSheetIndex(0)->setCellValueByColumnAndRow(9,1,'Is Big Buyer');
-            $spreadsheet->setActiveSheetIndex(0)->setCellValueByColumnAndRow(10,1,'Company Name');
-            $spreadsheet->setActiveSheetIndex(0)->setCellValueByColumnAndRow(11,1,'Designation');
-            $spreadsheet->setActiveSheetIndex(0)->setCellValueByColumnAndRow(12,1,'State');
-            $spreadsheet->setActiveSheetIndex(0)->setCellValueByColumnAndRow(13,1,'City');
-            $spreadsheet->setActiveSheetIndex(0)->setCellValueByColumnAndRow(14,1,'Village');
-            $spreadsheet->setActiveSheetIndex(0)->setCellValueByColumnAndRow(15,1,'Priority');
-            $spreadsheet->setActiveSheetIndex(0)->setCellValueByColumnAndRow(16,1,'Company Website');
-            $spreadsheet->setActiveSheetIndex(0)->setCellValueByColumnAndRow(17,1,'Unit');
-            $spreadsheet->setActiveSheetIndex(0)->setCellValueByColumnAndRow(18,1,'Quantity');
-            $spreadsheet->setActiveSheetIndex(0)->setCellValueByColumnAndRow(19,1,'Nos Of Column');
-            $spreadsheet->setActiveSheetIndex(0)->setCellValueByColumnAndRow(20,1,'Nos Of Panel');
-            $spreadsheet->setActiveSheetIndex(0)->setCellValueByColumnAndRow(21,1,'Height');
-            $spreadsheet->setActiveSheetIndex(0)->setCellValueByColumnAndRow(22,1,'Lead Value');
-            $spreadsheet->setActiveSheetIndex(0)->setCellValueByColumnAndRow(23,1,'Quotation Number');
-            $spreadsheet->setActiveSheetIndex(0)->setCellValueByColumnAndRow(24,1,'Source');
-            $spreadsheet->setActiveSheetIndex(0)->setCellValueByColumnAndRow(25,1,'Other Source');
-            $spreadsheet->setActiveSheetIndex(0)->setCellValueByColumnAndRow(26,1,'From Which Plant');
-            $spreadsheet->setActiveSheetIndex(0)->setCellValueByColumnAndRow(27,1,'Remarks');
-            /*$spreadsheet->setActiveSheetIndex(0)->setCellValueByColumnAndRow(28,1,'Attachment');*/
+            $spreadsheet->setActiveSheetIndex(0)->setCellValueByColumnAndRow(4,1,'Unit');
+            $spreadsheet->setActiveSheetIndex(0)->setCellValueByColumnAndRow(5,1,'Quantity');
+            $spreadsheet->setActiveSheetIndex(0)->setCellValueByColumnAndRow(6,1,'Lead Value');
+            $spreadsheet->setActiveSheetIndex(0)->setCellValueByColumnAndRow(7,1,'Status');
+            $spreadsheet->setActiveSheetIndex(0)->setCellValueByColumnAndRow(8,1,'Is Big Buyer');
+            $spreadsheet->setActiveSheetIndex(0)->setCellValueByColumnAndRow(9,1,'Priority');
+            $spreadsheet->setActiveSheetIndex(0)->setCellValueByColumnAndRow(10,1,'Source/Other Source');
+            $spreadsheet->setActiveSheetIndex(0)->setCellValueByColumnAndRow(11,1,'From Which Plant');
+            $spreadsheet->setActiveSheetIndex(0)->setCellValueByColumnAndRow(12,1,'Company Name');
+            $spreadsheet->setActiveSheetIndex(0)->setCellValueByColumnAndRow(13,1,'Name');
+            $spreadsheet->setActiveSheetIndex(0)->setCellValueByColumnAndRow(14,1,'Contact No.');
+            $spreadsheet->setActiveSheetIndex(0)->setCellValueByColumnAndRow(15,1,'Email');
+            $spreadsheet->setActiveSheetIndex(0)->setCellValueByColumnAndRow(16,1,'State');
+            $spreadsheet->setActiveSheetIndex(0)->setCellValueByColumnAndRow(17,1,'Order Date');
            
             $x = 2;
             $i = 0;
@@ -265,34 +284,66 @@ class Front_model extends CI_Model {
                 $spreadsheet->setActiveSheetIndex(0)->setCellValueByColumnAndRow(1,$x, $value['id']);
                 $spreadsheet->setActiveSheetIndex(0)->setCellValueByColumnAndRow(2,$x, date("d M, Y", $value['created_at'])." \n".date("h:i A", $value["created_at"]));
                 $spreadsheet->setActiveSheetIndex(0)->setCellValueByColumnAndRow(3,$x, $value['assign_master_user_name'] ? ucwords($value['assign_master_user_name']) : "--");
-                $spreadsheet->setActiveSheetIndex(0)->setCellValueByColumnAndRow(4,$x, ucwords($value['name']));
-                $spreadsheet->setActiveSheetIndex(0)->setCellValueByColumnAndRow(5,$x, $value['contact_no']);
-                $spreadsheet->setActiveSheetIndex(0)->setCellValueByColumnAndRow(6,$x, $value['email_address'] ? $value['email_address'] : "--");
-                if ($value['status'] == "Customer") {
-                    $spreadsheet->setActiveSheetIndex(0)->setCellValueByColumnAndRow(7,$x, date("d M, Y", $value['last_follow_up_updated_date'])." \n".date("h:i A", $value["last_follow_up_updated_date"]));
-                } else {
-                    $spreadsheet->setActiveSheetIndex(0)->setCellValueByColumnAndRow(7,$x, "--");
+                $spreadsheet->setActiveSheetIndex(0)->setCellValueByColumnAndRow(4,$x, $value['unit'] ? $value['unit'] : "--");
+                
+                $spreadsheet->setActiveSheetIndex(0)->setCellValueByColumnAndRow(5,$x, $value['quantity'] ? $value['quantity'] : "--");
+                $spreadsheet->setActiveSheetIndex(0)->setCellValueByColumnAndRow(6,$x, $value['lead_value'] ? $value['lead_value'] : 0);
+                $spreadsheet->setActiveSheetIndex(0)->setCellValueByColumnAndRow(7,$x, $value['status']);
+                $spreadsheet->setActiveSheetIndex(0)->setCellValueByColumnAndRow(8,$x, $value['is_big_buyer'] == 1 ? "Yes" : "--");
+                $spreadsheet->setActiveSheetIndex(0)->setCellValueByColumnAndRow(9,$x, $value['priority'] ? ucwords($value['priority']) : "--");
+                $source_name = ($value['source'] != "Others" ? $value['source'] : "");
+                if (!empty($value["other_source"])) {
+                    if (!empty($source_name)) {
+                        $source_name .= " / ".$value["other_source"];
+                    } else {
+                        $source_name = $value["other_source"];
+                    }
                 }
-                $spreadsheet->setActiveSheetIndex(0)->setCellValueByColumnAndRow(8,$x, $value['status']);
-                $spreadsheet->setActiveSheetIndex(0)->setCellValueByColumnAndRow(9,$x, $value['is_big_buyer'] == 1 ? "Yes" : "--");
-                $spreadsheet->setActiveSheetIndex(0)->setCellValueByColumnAndRow(10,$x, $value['company_name'] ? $value['company_name'] : "--");
-                $spreadsheet->setActiveSheetIndex(0)->setCellValueByColumnAndRow(11,$x, $value['designation'] ? $value['designation'] : "--");
-                $spreadsheet->setActiveSheetIndex(0)->setCellValueByColumnAndRow(12,$x, $value['state_name'] ? $value['state_name'] : "--");
-                $spreadsheet->setActiveSheetIndex(0)->setCellValueByColumnAndRow(13,$x, $value['city_name'] ? $value['city_name'] : "--");
-                $spreadsheet->setActiveSheetIndex(0)->setCellValueByColumnAndRow(14,$x, $value['village'] ? $value['village'] : "--");
-                $spreadsheet->setActiveSheetIndex(0)->setCellValueByColumnAndRow(15,$x, $value['priority'] ? ucwords($value['priority']) : "--");
-                $spreadsheet->setActiveSheetIndex(0)->setCellValueByColumnAndRow(16,$x, $value['company_website'] ? $value['company_website'] : "--");
-                $spreadsheet->setActiveSheetIndex(0)->setCellValueByColumnAndRow(17,$x, $value['unit'] ? $value['unit'] : "--");
-                $spreadsheet->setActiveSheetIndex(0)->setCellValueByColumnAndRow(18,$x, $value['quantity'] ? $value['quantity'] : "--");
-                $spreadsheet->setActiveSheetIndex(0)->setCellValueByColumnAndRow(19,$x, $value['nos_of_column'] ? $value['nos_of_column'] : "--");
-                $spreadsheet->setActiveSheetIndex(0)->setCellValueByColumnAndRow(20,$x, $value['nos_of_panel'] ? $value['nos_of_panel'] : "--");
-                $spreadsheet->setActiveSheetIndex(0)->setCellValueByColumnAndRow(21,$x, $value['height'] ? $value['height'] : "--");
-                $spreadsheet->setActiveSheetIndex(0)->setCellValueByColumnAndRow(22,$x, $value['lead_value'] ? $value['lead_value'] : 0);
-                $spreadsheet->setActiveSheetIndex(0)->setCellValueByColumnAndRow(23,$x, $value['quotation_number'] ? $value['quotation_number'] : "--");
-                $spreadsheet->setActiveSheetIndex(0)->setCellValueByColumnAndRow(24,$x, $value['source'] ? $value['source'] : "--");
-                $spreadsheet->setActiveSheetIndex(0)->setCellValueByColumnAndRow(25,$x, $value['other_source'] ? $value['other_source'] : "--");
-                $spreadsheet->setActiveSheetIndex(0)->setCellValueByColumnAndRow(26,$x, $value['plant_city_name'] ? $value['plant_city_name'] : "--");
-                $spreadsheet->setActiveSheetIndex(0)->setCellValueByColumnAndRow(27,$x, $value['remarks'] ? $value['remarks'] : "--");
+                $spreadsheet->setActiveSheetIndex(0)->setCellValueByColumnAndRow(10,$x, $source_name);
+                $spreadsheet->setActiveSheetIndex(0)->setCellValueByColumnAndRow(11,$x, $value['plant_city_name'] ? $value['plant_city_name'] : "--");
+                $spreadsheet->setActiveSheetIndex(0)->setCellValueByColumnAndRow(12,$x, $value['company_name'] ? $value['company_name'] : "--");
+                $spreadsheet->setActiveSheetIndex(0)->setCellValueByColumnAndRow(13,$x, ucwords($value['name']));
+                $spreadsheet->setActiveSheetIndex(0)->setCellValueByColumnAndRow(14,$x, $value['contact_no']);
+                $spreadsheet->setActiveSheetIndex(0)->setCellValueByColumnAndRow(15,$x, $value['email_address'] ? $value['email_address'] : "--");
+                $spreadsheet->setActiveSheetIndex(0)->setCellValueByColumnAndRow(16,$x, $value['state_name'] ? $value['state_name'] : "--");
+                if ($value['status'] == "Customer") {
+                    $spreadsheet->setActiveSheetIndex(0)->setCellValueByColumnAndRow(17,$x, date("d M, Y", $value['last_follow_up_updated_date'])." \n".date("h:i A", $value["last_follow_up_updated_date"]));
+                } else {
+                    $spreadsheet->setActiveSheetIndex(0)->setCellValueByColumnAndRow(17,$x, "--");
+                }
+
+                //  foreach($data as $value){
+                // $spreadsheet->setActiveSheetIndex(0)->setCellValueByColumnAndRow(1,$x, $value['id']);
+                // $spreadsheet->setActiveSheetIndex(0)->setCellValueByColumnAndRow(2,$x, date("d M, Y", $value['created_at'])." \n".date("h:i A", $value["created_at"]));
+                // $spreadsheet->setActiveSheetIndex(0)->setCellValueByColumnAndRow(3,$x, $value['assign_master_user_name'] ? ucwords($value['assign_master_user_name']) : "--");
+                // $spreadsheet->setActiveSheetIndex(0)->setCellValueByColumnAndRow(4,$x, ucwords($value['name']));
+                // $spreadsheet->setActiveSheetIndex(0)->setCellValueByColumnAndRow(5,$x, $value['contact_no']);
+                // $spreadsheet->setActiveSheetIndex(0)->setCellValueByColumnAndRow(6,$x, $value['email_address'] ? $value['email_address'] : "--");
+                // if ($value['status'] == "Customer") {
+                //     $spreadsheet->setActiveSheetIndex(0)->setCellValueByColumnAndRow(7,$x, date("d M, Y", $value['last_follow_up_updated_date'])." \n".date("h:i A", $value["last_follow_up_updated_date"]));
+                // } else {
+                //     $spreadsheet->setActiveSheetIndex(0)->setCellValueByColumnAndRow(7,$x, "--");
+                // }
+                // $spreadsheet->setActiveSheetIndex(0)->setCellValueByColumnAndRow(8,$x, $value['status']);
+                // $spreadsheet->setActiveSheetIndex(0)->setCellValueByColumnAndRow(9,$x, $value['is_big_buyer'] == 1 ? "Yes" : "--");
+                // $spreadsheet->setActiveSheetIndex(0)->setCellValueByColumnAndRow(10,$x, $value['company_name'] ? $value['company_name'] : "--");
+                // $spreadsheet->setActiveSheetIndex(0)->setCellValueByColumnAndRow(11,$x, $value['designation'] ? $value['designation'] : "--");
+                // $spreadsheet->setActiveSheetIndex(0)->setCellValueByColumnAndRow(12,$x, $value['state_name'] ? $value['state_name'] : "--");
+                // $spreadsheet->setActiveSheetIndex(0)->setCellValueByColumnAndRow(13,$x, $value['city_name'] ? $value['city_name'] : "--");
+                // $spreadsheet->setActiveSheetIndex(0)->setCellValueByColumnAndRow(14,$x, $value['village'] ? $value['village'] : "--");
+                // $spreadsheet->setActiveSheetIndex(0)->setCellValueByColumnAndRow(15,$x, $value['priority'] ? ucwords($value['priority']) : "--");
+                // $spreadsheet->setActiveSheetIndex(0)->setCellValueByColumnAndRow(16,$x, $value['company_website'] ? $value['company_website'] : "--");
+                // $spreadsheet->setActiveSheetIndex(0)->setCellValueByColumnAndRow(17,$x, $value['unit'] ? $value['unit'] : "--");
+                // $spreadsheet->setActiveSheetIndex(0)->setCellValueByColumnAndRow(18,$x, $value['quantity'] ? $value['quantity'] : "--");
+                // $spreadsheet->setActiveSheetIndex(0)->setCellValueByColumnAndRow(19,$x, $value['nos_of_column'] ? $value['nos_of_column'] : "--");
+                // $spreadsheet->setActiveSheetIndex(0)->setCellValueByColumnAndRow(20,$x, $value['nos_of_panel'] ? $value['nos_of_panel'] : "--");
+                // $spreadsheet->setActiveSheetIndex(0)->setCellValueByColumnAndRow(21,$x, $value['height'] ? $value['height'] : "--");
+                // $spreadsheet->setActiveSheetIndex(0)->setCellValueByColumnAndRow(22,$x, $value['lead_value'] ? $value['lead_value'] : 0);
+                // $spreadsheet->setActiveSheetIndex(0)->setCellValueByColumnAndRow(23,$x, $value['quotation_number'] ? $value['quotation_number'] : "--");
+                // $spreadsheet->setActiveSheetIndex(0)->setCellValueByColumnAndRow(24,$x, $value['source'] ? $value['source'] : "--");
+                // $spreadsheet->setActiveSheetIndex(0)->setCellValueByColumnAndRow(25,$x, $value['other_source'] ? $value['other_source'] : "--");
+                // $spreadsheet->setActiveSheetIndex(0)->setCellValueByColumnAndRow(26,$x, $value['plant_city_name'] ? $value['plant_city_name'] : "--");
+                // $spreadsheet->setActiveSheetIndex(0)->setCellValueByColumnAndRow(27,$x, $value['remarks'] ? $value['remarks'] : "--");
                 /*if (!empty($value['attachment'])) {
                     foreach (json_decode($value["attachment"], true) as $value_attachment) {
                         $spreadsheet->setActiveSheetIndex(0)->setCellValueByColumnAndRow(28,$x, $value['attachment'] ? "Click Here" : "--");

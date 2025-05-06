@@ -43,7 +43,7 @@ class Services extends CI_Controller {
         $currentMethod = $this->router->fetch_method();
         
         if(!in_array($currentMethod, $allowedMethods)){
-            if($_SERVER['HTTP_HOST'] == "192.168.1.28"){
+            if($_SERVER['HTTP_HOST'] == "192.168.1.6"){
                 $this->input->request_headers();
                 $token = $this->input->get_request_header('Authorization');
             } else {
@@ -298,7 +298,20 @@ class Services extends CI_Controller {
                     if (empty($m_u_details)) {
                         $response["success"] = 0;
                         $response["message"] = "Master user not found.";
-                    } else {
+                    } else { 
+                        
+                        $financialyear = $post["financial_year"];
+                        $years = explode('-', $financialyear);
+                        $startYear = $years[0];
+                        $endYear   = $years[1];
+                        $startDateStr = $startYear.'-04-01 00:00:00';
+                        $endDateStr   = $endYear.'-03-31 23:59:59';
+                        $financial_year_from = strtotime($startDateStr);
+                        $financial_year_to   = strtotime($endDateStr);
+                        
+                        /*print_r(['startTimestamp' => $startTimestamp,'endTimestamp'   => $endTimestamp]);
+                        die;*/
+
                         $today_dateTime = strtotime(date(date('Y-m-d',strtotime("today"))."00:00:00"));
                         $today_dateTimeEnd = strtotime(date(date('Y-m-d',strtotime("today"))."23:59:59"));
 
@@ -310,6 +323,9 @@ class Services extends CI_Controller {
                         }
 
                         $and_condition = "";
+                        if ($post["dashboard"] != 1) {
+                            $and_condition .= " and created_at >= ".$financial_year_from." and created_at <= ".$financial_year_to;
+                        }
                         $and_condition .= " and is_deleted = 0";
                         $or_condition = "";
                         $master_user_id_con = "";
@@ -326,7 +342,7 @@ class Services extends CI_Controller {
                         $order_by = " order by created_at desc";
                         $status_customer_found = 0;
 
-                        if (!empty($post["filter"])) {
+                        if (!empty($post["filter"])) { 
                             $filter = json_decode($post["filter"], true);
                             
                             if (!empty($filter["status"]) && $filter["status"] != "[]") {
@@ -457,7 +473,7 @@ class Services extends CI_Controller {
                             $pagelimit = "";
                         }
 
-                        $result = $this->db->query("select SQL_CALC_FOUND_ROWS * from inquiries where 1=1 ".$and_condition.$or_condition_add.$search_condition.$order_by.$pagelimit)->result_array();
+                        $result = $this->db->query("SELECT SQL_CALC_FOUND_ROWS * from inquiries where 1=1 ".$and_condition.$or_condition_add.$search_condition.$order_by.$pagelimit)->result_array();
                         if ($post["export"] == 1) {
                             $response["file_path"] = $this->front_model->export_all_inquiry_sheet($result, $lead_type);
                             if($response["file_path"]){

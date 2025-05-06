@@ -61,15 +61,15 @@
                     <div class="p_5"></div>
                 </ng-container>
 
-                <div class="title_Financial_wrapper">
+                <div class="title_Financial_wrapper"  *ngIf="router.url == '/inquiries'">
                     <select class="search_input_finance" matNativeControl name="financialYear"
-                        [(ngModel)]="selectedFinancialYear" (ngModelChange)="onFinancialYearChange($event)">
+                        [(ngModel)]="inquiries_obj.financial_year" (ngModelChange)="inquiries_get('filter_apply');">
                         <option *ngFor="let financial of financialyear; trackBy: trackyear" [value]="financial.value">
-                            {{ financial.viewValue }}
+                            {{financial.viewValue}}
                         </option>
                     </select>
-
                 </div>
+                
                 <div class="p_5"></div>
                 <div class="title_search_wrapper">
                     <input type="text" class="form-control search_input" [(ngModel)]="inquiries_obj.search"
